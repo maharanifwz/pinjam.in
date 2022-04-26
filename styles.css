@@ -7,26 +7,43 @@ body {
     margin: 0 auto;
 }
 
+*{
+    margin: 0;
+    padding: 0;
+}
+
 h1 {
     font-size: 40px;
     padding-top: 50px;
 }
 
+p {
+    font-size: 12px;
+}
+
+/* login dan register */
+
 label {
     font-size: 16px;
 }
 
-p {
-    font-size: 12px;
+.description {
     margin-left: 50px;
 }
 
 .container-fluid {
-    padding: 0 50px;
+    padding: 0 5%;
 }
 
 .login {
     background: url('login.png');
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.register{
+    background: url(register.png);
     background-position: right;
     background-repeat: no-repeat;
     height: 100vh;
@@ -40,7 +57,7 @@ input {
     margin-bottom: 25px;
 }
 
-.submit {
+.submit, button {
     background: #FF8435;
     border: none;
     height: 35px;
@@ -49,15 +66,40 @@ input {
     margin: 0;
 }
 
+/* landingpage */
+
+button {
+    border-radius: 10px;
+    width: 150px;
+}
+
 span {
     color: #FF8435;
 }
 
-/* Register */
+.navbar {
+    display: flex;
+}
 
-.register{
-    background: url(register.png);
+ul {
+    text-decoration: none;
+    list-style: none;
+}
+
+.heading {
+    color: #017592;
+    margin-bottom: 0;
+}
+
+.title {
+    width: 500px;
+    margin-bottom: 0;
+}
+
+#home {
+    background: url('homepage.png');
     background-position: right;
     background-repeat: no-repeat;
+    background-size: contain;
     height: 100vh;
 }
