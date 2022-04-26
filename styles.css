@@ -1,13 +1,14 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0 auto;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
 }
@@ -20,6 +21,7 @@ h1 {
 p {
     font-size: 12px;
 }
+
 
 /* login dan register */
 
@@ -42,7 +44,7 @@ label {
     height: 100vh;
 }
 
-.register{
+.register {
     background: url(register.png);
     background-position: right;
     background-repeat: no-repeat;
@@ -50,6 +52,8 @@ label {
 }
 
 input {
+    padding-left: 10px;
+    padding-right: 10px;
     border: 1px solid #AFAFAF;
     border-radius: 10px;
     width: 300px;
@@ -57,7 +61,8 @@ input {
     margin-bottom: 25px;
 }
 
-.submit, button {
+.submit,
+button {
     background: #FF8435;
     border: none;
     height: 35px;
@@ -65,6 +70,7 @@ input {
     font-family: 'Poppins', sans-serif;
     margin: 0;
 }
+
 
 /* landingpage */
 
@@ -102,4 +108,9 @@ ul {
     background-repeat: no-repeat;
     background-size: contain;
     height: 100vh;
+}
+
+a {
+    color: #0060B6;
+    text-decoration: none;
 }
