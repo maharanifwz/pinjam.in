@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0 auto;
@@ -47,4 +51,13 @@ input {
 
 span {
     color: #FF8435;
+}
+
+/* Register */
+
+.register{
+    background: url(register.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
