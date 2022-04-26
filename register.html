@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
 
     <!-- Link CSS -->
     <link rel="stylesheet" href="styles.css">
@@ -18,21 +18,33 @@
 </head>
 
 <body>
-    <div class="login">
+    <div class="register">
         <div class="container-fluid">
-            <h1>Masuk</h1>
+            <h1>Daftar</h1>
             <form action="" method="get">
+                <div>
+                    <label for="name">Nama</label><br>
+                    <input type="text" name="name" id="name" required>
+                </div>
+                <div>
+                    <label for="contact">Kontak</label><br>
+                    <input type="contact" name="contact" id="contact" required>
+                </div>
                 <div>
                     <label for="username">Username</label><br>
                     <input type="text" name="username" id="username" required>
                 </div>
-                <div class="form-example">
+                <div>
+                    <label for="alamat">Alamat</label><br>
+                    <input type="text" name="alamat" id="alamat" required>
+                </div>
+                <div>
                     <label for="password">Password</label><br>
                     <input type="password" name="password" id="password" required>
                 </div>
-                <div class="form-example">
-                    <input class="submit" type="submit" value="Masuk">
-                    <p class="description">Belum memiliki akun ? <span>Daftar disini</span></p>
+                <div>
+                    <input class="submit" type="submit" value="Daftar">
+                    <p class="description">Sudah memiliki akun ? Masuk disini? <span>Masuk disini</span></p>
                 </div>
             </form>
         </div>
