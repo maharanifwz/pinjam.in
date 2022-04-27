@@ -32,6 +32,7 @@ if (isset($_POST['Register'])) {
                 $email = "";
                 $alamat = "";
                 $_POST['password'] = "";
+                header("Location: login.php");
             } else {
                 echo "<script>alert('Terjadi kesalahan.')</script>";
             }
