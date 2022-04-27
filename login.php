@@ -1,7 +1,6 @@
 <?php
-
+include 'config.php';
 session_start();
-$mysqli = new mysqli('localhost', 'root', '1234567', 'pinjamin');
 
 if (isset($_POST['Masuk'])) {
     // echo "<script>alert('username anda = ' . )</script>";
