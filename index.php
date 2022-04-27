@@ -1,3 +1,10 @@
+<?php
+$mysqli = new mysqli('localhost', 'root', '1234567', 'pinjamin');
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,10 +37,10 @@
                                 <a href="">Home</a>
                             </li>
                             <li>
-                                <a href="login.html">Masuk</a>
+                                <a href="login.php">Masuk</a>
                             </li>
                             <li>
-                                <a href="register.html">Daftar</a>
+                                <a href="register.php">Daftar</a>
                             </li>
                         </ul>
                     </div>
