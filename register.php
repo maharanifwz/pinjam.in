@@ -2,6 +2,47 @@
 
 include 'config.php';
 
+session_start();
+
+// if (isset($_SESSION['username'])) {
+//     header("Location: index.php");
+// }
+
+if (isset($_POST['Register'])) {
+    $nama = $_POST['name'];
+    $email = $_POST['email'];
+    $username = $_POST['username'];
+    $alamat = $_POST['alamat'];
+    $password = $_POST['password'];
+
+
+
+    $sql = "SELECT * FROM pengguna WHERE email = '$email'";
+    $result = mysqli_query($mysqli, $sql);
+    if (!$result->num_rows > 0) {
+        $sql = "SELECT * FROM pengguna WHERE username = '$username'";
+        $result = mysqli_query($mysqli, $sql);
+        if (!$result->num_rows > 0) {
+            $sqlquery = "INSERT INTO pengguna VALUES (NULL, '$nama', '$username', '$email', '$alamat' ,'$password');";
+            $result = mysqli_query($mysqli, $sqlquery);
+            if ($result) {
+                echo "<script>alert('Selamat, registrasi berhasil!')</script>";
+                $username = "";
+                $nama = "";
+                $email = "";
+                $alamat = "";
+                $_POST['password'] = "";
+            } else {
+                echo "<script>alert('Terjadi kesalahan.')</script>";
+            }
+        } else {
+            echo "<script>alert('Username Sudah Terdaftar.')</script>";
+        }
+    } else {
+        echo "<script>alert('Email Sudah Terdaftar.')</script>";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -26,14 +67,14 @@ include 'config.php';
     <div class="register">
         <div class="container-fluid">
             <h1>Daftar</h1>
-            <form action="" method="get">
+            <form action="#" method="POST">
                 <div>
                     <label for="name">Nama</label><br>
                     <input type="text" name="name" id="name" required>
                 </div>
                 <div>
-                    <label for="contact">Kontak</label><br>
-                    <input type="contact" name="contact" id="contact" required>
+                    <label for="email">Email</label><br>
+                    <input type="email" name="email" id="email" required>
                 </div>
                 <div>
                     <label for="username">Username</label><br>
@@ -48,7 +89,7 @@ include 'config.php';
                     <input type="password" name="password" id="password" required>
                 </div>
                 <div>
-                    <input class="submit" type="submit" value="Daftar">
+                    <input class="submit" type="submit" value="Daftar" name="Register">
                     <p class="description">Sudah memiliki akun ? <span><a href="login.php">Masuk disini</a></span></p>
                 </div>
             </form>
