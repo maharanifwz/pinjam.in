@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli('localhost', 'root', '1234567', 'pinjamin');
+include 'config.php';
 
 session_start();
 
@@ -26,7 +26,7 @@ session_start();
 <body>
     <section id="home">
         <div class="container-fluid">
-            <nav>
+            <!-- <nav>
                 <div class="navbar">
                     <div>
                         <a href="">pinjam.in</a>
@@ -45,18 +45,54 @@ session_start();
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </nav> -->
+
+            <div class="wrapper">
+                <header>
+                    <nav>
+                        <a href="#" class="logo">
+                            pinjam.in
+                        </a>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="login.html">Masuk</a></li>
+                            <li><a href="register.html">Daftar</a></li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
 
             <div class="title">
                 <h1 class="heading">Hadir untuk mengatasi permasalahan finansial Anda.</h1>
-                <p class="heading-desc">Butuh uang cepat? Tidak ingin terlihat di riwayat transaksi? Coba pinjamin untuk meminjam uang secara aman.
-                </p>
+                <p class="heading-desc">Butuh uang cepat? Tidak ingin terlihat di riwayat transaksi? Coba pinjamin untuk
+                    meminjam uang secara
+                    aman.</p>
                 <button type="button">Mulai</button>
             </div>
 
         </div>
     </section>
 
+    <section id="installment">
+        <div class="container-fluid">
+            <h1 class="installment-title">SIMULASIKAN PINJAMAN ANDA</h1>
+            <div class="installment-text">
+                <h3 class="installment-desc">Cari Tahu Angsuran Mu Disini</h3>
+                <div>
+                    <label for="besarpinjaman">Besar Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="besarpinjaman" id="besarpinjaman" required>
+                </div>
+                <div>
+                    <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="tenorpinjaman" id="tenorpinjaman" required>
+                </div>
+                <div>
+                    <label for="tanggalpinjaman">Tanggal Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="date" name="tanggalpinjaman" id="tanggalpinjaman" required>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 </body>

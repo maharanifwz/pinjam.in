@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+
 session_start();
 
 if (isset($_POST['Masuk'])) {
@@ -61,7 +62,7 @@ if (isset($_POST['Masuk'])) {
                     <label for="username">Username</label><br>
                     <input type="text" name="username" id="username" required>
                 </div>
-                <div class="form-example">
+                <div>
                     <label for="password">Password</label><br>
                     <input type="password" name="password" id="password" required>
                 </div>
