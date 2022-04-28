@@ -132,7 +132,7 @@ label {
     height: 100vh;
 }
 
-input {
+input, select, option{
     padding-left: 10px;
     padding-right: 10px;
     border: 1px solid #AFAFAF;
@@ -140,6 +140,11 @@ input {
     width: 300px;
     height: 30px;
     margin-bottom: 25px;
+}
+
+select {
+    width: 323px;
+    height: 32px;
 }
 
 .submit,
@@ -209,14 +214,24 @@ ul {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
     width: 700px;
-    height: 200px;
+    height: 275px;
     padding: 5% 5%;
     left: 130px;
     top: 1189px;
+    margin: 0 auto;
     margin-bottom: 100px;
 }
 
 a {
     color: #0060B6;
     text-decoration: none;
+}
+
+#tanggalpinjaman {
+    margin-bottom: 45px;
+}
+
+.center {
+    align-items: center;
+    text-align: center;
 }

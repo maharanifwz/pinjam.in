@@ -83,18 +83,26 @@ session_start();
                     <input type="text" name="besarpinjaman" id="besarpinjaman" required>
                 </div>
                 <div>
+                    <!-- <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="tenorpinjaman" id="tenorpinjaman" required> -->
                     <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" name="tenorpinjaman" id="tenorpinjaman" required>
+                    <select name="tenor" id="tenor">
+                        <option value="">--Silahkan pilih tenor yang tersedia--</option>
+                        <option value="hari">Hari</option>
+                        <option value="bulan">Bulan</option>
+                    </select>
+                    <br>
                 </div>
                 <div>
-                    <label for="tanggalpinjaman">Tanggal Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="tanggalpinjaman">Tanggal Pinjaman</label>&nbsp;&nbsp;&nbsp;
                     <input type="date" name="tanggalpinjaman" id="tanggalpinjaman" required>
+                </div>
+                <div class="center">
+                    <input class="submit" type="submit" value="Mulai Simulasi" name="Mulai Simulasi">
                 </div>
             </div>
         </div>
     </section>
-
-
 </body>
 
 </html>
