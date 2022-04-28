@@ -55,8 +55,13 @@ session_start();
                         </a>
                         <ul>
                             <li><a href="#">Home</a></li>
-                            <li><a href="login.html">Masuk</a></li>
-                            <li><a href="register.html">Daftar</a></li>
+                            <?php if (isset($_SESSION['state'])){?>
+                                <li><a href="logout.php">Keluar</a></li>
+                            <?php }else{ ?>
+                                <li><a href="login.php">Masuk</a></li>
+                                <li><a href="register.php">Daftar</a></li>
+                            <?php }?>
+                            
                         </ul>
                     </nav>
                 </header>

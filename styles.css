@@ -88,16 +88,16 @@ nav ul li:hover ul {
     position: absolute;
 }
 
-nav ul li:hover {
+/* nav ul li:hover {
+    
+} */
+
+nav li a:hover {
     color: #FFFCED;
     border-radius: 15px;
     background: #F7B13C;
     width: 20%;
     padding: 10px;
-}
-
-nav li a:hover {
-    color: #FFFCED;
 }
 
 nav ul li ul {
