@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli('localhost', 'root', '1234567', 'pinjamin');
+include 'config.php';
 
 session_start();
 
