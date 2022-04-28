@@ -276,3 +276,34 @@ a {
     margin-top: 0px;
     margin-left: 25px;
 }
+/* Modal */
+#modal {
+    width: 100%;
+    /* display: none; */
+    position: absolute;
+    padding: 5% 0 5% 0;
+}
+
+table {
+    width: 100%;
+    border-radius: 15px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+
+th,
+td {
+    /* border-bottom: 1px solid black; */
+    text-align: center;
+    padding: 2px;
+}
+
+th {
+    background: #FF8435;
+    color: #FFFFFF;
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(255, 132, 53, 0.5);
+}

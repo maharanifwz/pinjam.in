@@ -147,6 +147,42 @@ session_start();
             </div>
         </div>
     </section>
+    
+    <section id = "modal">
+        <div class="container-fluid">
+            <table>
+                <tr>
+                    <th>Periode</th>
+                    <th>Angsuran Bunga</th>
+                    <th>Angsuran Pokok</th>
+                    <th>Angsuran Total</th>
+                    <th>Sisa Angsuran</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Rp.000</td>
+                    <td>Rp.000</td>
+                    <td>Rp.000</td>
+                    <td>Rp.000</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Rp.000</td>
+                    <td>Rp.000</td>
+                    <td>Rp.000</td>
+                    <td>Rp.000</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
 </body>
 
 </html>
