@@ -133,6 +133,8 @@ label {
 }
 
 input {
+    padding-left: 10px;
+    padding-right: 10px;
     border: 1px solid #AFAFAF;
     border-radius: 10px;
     width: 300px;
@@ -149,6 +151,7 @@ button {
     font-family: 'Poppins', sans-serif;
     margin: 0;
 }
+
 
 /* landingpage */
 
@@ -211,4 +214,9 @@ ul {
     left: 130px;
     top: 1189px;
     margin-bottom: 100px;
+}
+
+a {
+    color: #0060B6;
+    text-decoration: none;
 }

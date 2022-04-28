@@ -1,3 +1,10 @@
+<?php
+$mysqli = new mysqli('localhost', 'root', '1234567', 'pinjamin');
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,8 +20,7 @@
     <!-- Link Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -31,10 +37,10 @@
                                 <a href="">Home</a>
                             </li>
                             <li>
-                                <a href="">Masuk</a>
+                                <a href="login.php">Masuk</a>
                             </li>
                             <li>
-                                <a href="">Daftar</a>
+                                <a href="register.php">Daftar</a>
                             </li>
                         </ul>
                     </div>
