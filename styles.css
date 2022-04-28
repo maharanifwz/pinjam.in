@@ -1,24 +1,107 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0 auto;
 }
 
-*{
-    margin: 0;
-    padding: 0;
-}
-
 h1 {
     font-size: 40px;
     padding-top: 50px;
+    color: #017592;
 }
 
 p {
     font-size: 12px;
+}
+
+/* navbar */
+.wrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+
+nav {
+    position: fixed;
+    display: flex;
+    top: 5%;
+    left: 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.6s;
+    padding: 0 5%;
+    z-index: 100000;
+}
+
+nav .sticky {
+    padding: 5px 10px;
+    background: black;
+}
+
+header .sticky .logo,
+header .sticky ul li a {
+    color: black;
+}
+
+nav .logo {
+    font-family: "Playfair Display";
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 40px;
+    color: black;
+    /* Tambahan*/
+    position: relative;
+    transition: 0.6s;
+}
+
+nav ul {
+    position: relative;
+    display: flex;
+    justify-content: content;
+    align-items: center;
+    margin-right: 700px;
+}
+
+nav ul li {
+    position: relative;
+    list-style: none;
+    line-height: 15px;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+}
+
+nav ul li a {
+    position: relative;
+    margin-right: 65px;
+    text-decoration: none;
+    transition: 0.6s;
+    color: black;
+}
+
+nav ul li:hover ul {
+    display: block;
+    position: absolute;
+}
+
+nav ul li:hover {
+    color: #FFFCED;
+    border-radius: 15px;
+    background: #F7B13C;
+    width: 20%;
+    padding: 10px;
+}
+
+nav li a:hover {
+    color: #FFFCED;
+}
+
+nav ul li ul {
+    display: none;
 }
 
 /* login dan register */
@@ -42,8 +125,8 @@ label {
     height: 100vh;
 }
 
-.register{
-    background: url(register.png);
+.register {
+    background: url('register.png');
     background-position: right;
     background-repeat: no-repeat;
     height: 100vh;
@@ -57,7 +140,8 @@ input {
     margin-bottom: 25px;
 }
 
-.submit, button {
+.submit,
+button {
     background: #FF8435;
     border: none;
     height: 35px;
@@ -71,6 +155,7 @@ input {
 button {
     border-radius: 10px;
     width: 150px;
+    margin-top: 25px;
 }
 
 span {
@@ -87,13 +172,13 @@ ul {
 }
 
 .heading {
-    color: #017592;
-    margin-bottom: 0;
+    margin-bottom: 0px;
 }
 
 .title {
     width: 500px;
     margin-bottom: 0;
+    padding-top: 10%;
 }
 
 #home {
@@ -102,4 +187,28 @@ ul {
     background-repeat: no-repeat;
     background-size: contain;
     height: 100vh;
+}
+
+/* installment */
+.installment-title {
+    text-align: center;
+    align-items: center;
+    padding-bottom: 5%;
+}
+
+.installment-desc {
+    color: #017592;
+    padding-bottom: 2%;
+}
+
+.installment-text {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    width: 700px;
+    height: 200px;
+    padding: 5% 5%;
+    left: 130px;
+    top: 1189px;
+    margin-bottom: 100px;
 }
