@@ -19,17 +19,22 @@ if (isset($_POST['Masuk'])) {
 
     $data = $rs->fetch_assoc();
 
-    $message = $data['username'];
-    echo "<script type='text/javascript'>alert('$message');</script>";
-
-    if ($data['password'] != $password) {
-        echo "<script>alert('Password Anda salah. Silahkan coba lagi!')</script>";
-        return;
-    } else {
-        $_SESSION['username'] = $username;
-        $_SESSION['password'] = $password;
-        $_SESSION['state'] = true;
-        header("Location: index.php");
+    if ($rs->num_rows > 0) {
+        if ($data['password'] != $password) {
+            echo "<script>alert('Password Anda salah. Silahkan coba lagi!')</script>";
+            return;
+        } else {
+            $_SESSION['username'] = $username;
+            $_SESSION['password'] = $password;
+            $_SESSION['state'] = true;
+            header("Location: index.php");
+        }
+    }else{
+        echo "<script>alert('Username Tidak Dikenali. Silahkan coba lagi!')</script>";
+        $_POST['username'] = NULL;
+        $_POST['password'] = NULL;
+        $username = "";
+        $password = "";
     }
 }
 
