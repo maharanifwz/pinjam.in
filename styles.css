@@ -27,14 +27,15 @@ p {
 nav {
     position: fixed;
     display: flex;
-    top: 5%;
     left: 0;
     width: 100%;
+    height: 10%;
     justify-content: space-between;
     align-items: center;
     transition: 0.6s;
     padding: 0 5%;
     z-index: 100000;
+    background: #FFFFFF;
 }
 
 nav .sticky {
@@ -132,7 +133,9 @@ label {
     height: 100vh;
 }
 
-input, select, option{
+input,
+select,
+option {
     padding-left: 10px;
     padding-right: 10px;
     border: 1px solid #AFAFAF;
@@ -209,7 +212,7 @@ ul {
     padding-bottom: 2%;
 }
 
-.installment-text {
+.installment-text, .simulation-text {
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
@@ -219,7 +222,7 @@ ul {
     left: 130px;
     top: 1189px;
     margin: 0 auto;
-    margin-bottom: 100px;
+    margin-bottom: 150px;
 }
 
 a {
@@ -234,4 +237,42 @@ a {
 .center {
     align-items: center;
     text-align: center;
+}
+
+/* menu */
+.box-container {
+    display: flex;
+    border: none;
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+.box {
+    padding: 25px;
+    /* properti lainnya */
+    background: rgba(153, 231, 250, 0.25);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 35px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border: none;
+    text-align: center;
+    width: 900px;
+    height: 325px;
+    margin-bottom: 50px;
+}
+
+.simulation-text {
+    width: 800px;
+    height: 100px;
+}
+
+.simulation-desc {
+    display: flex;
+}
+
+.simulation-btn {
+    margin-top: 0px;
+    margin-left: 25px;
 }

@@ -55,13 +55,13 @@ session_start();
                         </a>
                         <ul>
                             <li><a href="#">Home</a></li>
-                            <?php if (isset($_SESSION['state'])){?>
+                            <?php if (isset($_SESSION['state'])) { ?>
                                 <li><a href="logout.php">Keluar</a></li>
-                            <?php }else{ ?>
+                            <?php } else { ?>
                                 <li><a href="login.php">Masuk</a></li>
                                 <li><a href="register.php">Daftar</a></li>
-                            <?php }?>
-                            
+                            <?php } ?>
+
                         </ul>
                     </nav>
                 </header>
@@ -104,6 +104,45 @@ session_start();
                 </div>
                 <div class="center">
                     <input class="submit" type="submit" value="Mulai Simulasi" name="Mulai Simulasi">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu">
+        <div class="container-fluid">
+            <h1 class="installment-title">CARI TAHU KEBUTUHANMU</h1>
+            <div class="box-container">
+                <div class="box">
+                    <img src="simulasi.png" alt="Simulasi Angsuran">
+                    <h3>Simulasi Angsuran</h3>
+                    <p>Cek bagaimana angsuran yang harus dibayarkan secara efektif perbulannya beserta bunga nya.</p>
+                    <button type="button">Coba Bayar</button>
+                </div>
+                <div class="box">
+                    <img src="rincian.png" alt="Rincian Angsuran">
+                    <h3>Rincian Angsuran</h3>
+                    <p>Cek bagaimana perhitungan angsuran yang harus dibayarkan perbulannya secara rinci.</p>
+                    <button type="button">Cek Rincian</button>
+                </div>
+                <div class="box">
+                    <img src="total.png" alt="Total Angsuran">
+                    <h3>Total Angsuran</h3>
+                    <p>Cek angsuran selanjutnya yang harus dibayarkan berdasarkan perhitungan dengan bunga.</p>
+                    <button type="button">Cek Total Angsuran</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="#simulation">
+        <div class="container-fluid">
+            <div class="simulation-text">
+                <h3 class="installment-desc">Simulasi Angsuran</h3>
+                <div class="simulation-desc">
+                    <label for="angsuran">Angsuran yang dibayarkan</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="angsuran" id="angsuran" required>
+                    <button class="simulation-btn" type="button">Coba Bayar</button>
                 </div>
             </div>
         </div>
