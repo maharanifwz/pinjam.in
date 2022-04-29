@@ -102,7 +102,7 @@ session_start();
                     <input type="date" name="tanggalpinjaman" id="tanggalpinjaman" required>
                 </div>
                 <div class="center">
-                    <input class="submit" type="submit" value="Mulai Simulasi" name="Mulai Simulasi">
+                    <input class="submit" type="submit" value="Simpan Data Pinjaman" name="Simpan Data">
                 </div>
             </div>
         </div>
@@ -149,6 +149,7 @@ session_start();
     
     <section id = "modal">
         <div class="container-fluid">
+            <h1 class="installment-title">Rincian Angsuran</h1>
             <table>
                 <tr>
                     <th>Periode</th>
