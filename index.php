@@ -2,6 +2,8 @@
 include 'config.php';
 
 session_start();
+
+$totalangsuran = 0;
 ?>
 
 <!DOCTYPE html>
@@ -236,7 +238,7 @@ session_start();
                                         );
 
                                         $angsuranpokok = ceil($sisapinjaman / $periode);
-                                        $totalangsuran = 0;
+                                        
 
                                         foreach ($timeInterval as $key => $value) {
                                             echo "<table>
@@ -250,7 +252,7 @@ session_start();
                                                 </tr>";
                                             $angsuranbunga = ceil($sisapinjaman * $bunga);
                                             $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
-                                            $totalangsuran = $totalangsuran + $angsurantotal;
+                                            $totalangsuran += $angsurantotal;
                                             $angsuranbunga_v = number_format($angsuranbunga);
                                             $angsuranpokok_v = number_format($angsuranpokok);
                                             $angsurantotal_v = number_format($angsurantotal);
