@@ -50,10 +50,9 @@ session_start();
             </div>
 
             <div class="title">
-                <h1 class="heading">Hadir untuk mengatasi permasalahan finansial Anda.</h1>
-                <p class="heading-desc">Butuh uang cepat? Tidak ingin terlihat di riwayat transaksi? Coba pinjamin untuk
-                    meminjam uang secara
-                    aman.</p>
+                <h1 class="heading">Hadir untuk mempermudah anda dalam merencanakan finansial anda.</h1>
+                <p class="heading-desc">Ingin mengetahui bagaimana pinjaman yang kamu ambil akan membebani 
+                    finansial mu kedepannya? Coba pinjamin untuk melihat rencana pinjaman mu!</p>
                 <button type="button">Mulai</button>
             </div>
 
@@ -85,7 +84,7 @@ session_start();
                     <input type="date" name="tanggalpinjaman" id="tanggalpinjaman" required>
                 </div>
                 <div class="center">
-                    <input class="submit" type="submit" value="Mulai Simulasi" name="Mulai Simulasi">
+                    <input class="submit" type="submit" value="Simpan Data Pinjaman" name="Simpan Data">
                 </div>
             </div>
         </div>
