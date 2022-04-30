@@ -11,7 +11,20 @@ body {
 h1 {
     font-size: 40px;
     padding-top: 50px;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 55px;
     color: #017592;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 22px;
+}
+
+h3 {
+    font-weight: 600;
+    font-size: 20px;
 }
 
 p {
@@ -33,7 +46,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     transition: 0.6s;
-    padding: 0 5%;
+    padding: 3% 5% 3%;
     z-index: 100000;
     background: #FFFFFF;
 }
@@ -65,6 +78,7 @@ nav ul {
     justify-content: content;
     align-items: center;
     margin-right: 700px;
+    padding-top: 2%;
 }
 
 nav ul li {
@@ -186,6 +200,10 @@ ul {
     margin-bottom: 0px;
 }
 
+.heading-desc {
+    margin-bottom: 0;
+}
+
 .title {
     width: 500px;
     margin-bottom: 0;
@@ -212,17 +230,18 @@ ul {
     padding-bottom: 2%;
 }
 
-.installment-text, .simulation-text {
+.installment-text,
+.simulation-text {
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
     width: 700px;
-    height: 275px;
-    padding: 5% 5%;
+    height: 325px;
+    padding: 0 5%;
     left: 130px;
     top: 1189px;
     margin: 0 auto;
-    margin-bottom: 150px;
+    margin-bottom: 100px;
 }
 
 a {
@@ -259,13 +278,27 @@ a {
     border: none;
     text-align: center;
     width: 900px;
-    height: 325px;
+    height: 350px;
     margin-bottom: 50px;
 }
 
+.box-desc {
+    margin-bottom: 0;
+}
+
+/* simulation */
+
+/* #simulation {
+    background: url('footer.png');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+} */
+
 .simulation-text {
-    width: 800px;
-    height: 100px;
+    width: 900px;
+    height: 125px;
+    border-radius: 25px;
 }
 
 .simulation-desc {
@@ -276,6 +309,7 @@ a {
     margin-top: 0px;
     margin-left: 25px;
 }
+
 /* Modal */
 #modal {
     width: 100%;
@@ -306,4 +340,8 @@ th {
 
 tr:nth-child(odd) {
     background-color: rgb(255, 132, 53, 0.5);
+}
+
+.modal-dialog {
+    padding-top: 7%;
 }

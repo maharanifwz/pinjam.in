@@ -14,6 +14,10 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pinjam.in</title>
 
+    <!-- Link Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
     <!-- Link CSS -->
     <link rel="stylesheet" href="styles.css">
 
@@ -26,27 +30,6 @@ session_start();
 <body>
     <section id="home">
         <div class="container-fluid">
-            <!-- <nav>
-                <div class="navbar">
-                    <div>
-                        <a href="">pinjam.in</a>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>
-                                <a href="">Home</a>
-                            </li>
-                            <li>
-                                <a href="login.php">Masuk</a>
-                            </li>
-                            <li>
-                                <a href="register.php">Daftar</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav> -->
-
             <div class="wrapper">
                 <header>
                     <nav>
@@ -61,7 +44,6 @@ session_start();
                                 <li><a href="login.php">Masuk</a></li>
                                 <li><a href="register.php">Daftar</a></li>
                             <?php } ?>
-
                         </ul>
                     </nav>
                 </header>
@@ -82,7 +64,7 @@ session_start();
         <div class="container-fluid">
             <h1 class="installment-title">SIMULASIKAN PINJAMAN ANDA</h1>
             <div class="installment-text">
-                <h3 class="installment-desc">Cari Tahu Angsuran Mu Disini</h3>
+                <h2 class="installment-desc">Cari Tahu Angsuran Mu Disini</h2>
                 <div>
                     <label for="besarpinjaman">Besar Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="text" name="besarpinjaman" id="besarpinjaman" required>
@@ -116,73 +98,87 @@ session_start();
                 <div class="box">
                     <img src="simulasi.png" alt="Simulasi Angsuran">
                     <h3>Simulasi Angsuran</h3>
-                    <p>Cek bagaimana angsuran yang harus dibayarkan secara efektif perbulannya beserta bunga nya.</p>
+                    <p class="box-desc">Cek bagaimana angsuran yang harus dibayarkan secara efektif perbulannya beserta bunga nya.</p>
                     <button type="button">Coba Bayar</button>
                 </div>
                 <div class="box">
                     <img src="rincian.png" alt="Rincian Angsuran">
                     <h3>Rincian Angsuran</h3>
-                    <p>Cek bagaimana perhitungan angsuran yang harus dibayarkan perbulannya secara rinci.</p>
+                    <p class="box-desc">Cek bagaimana perhitungan angsuran yang harus dibayarkan perbulannya secara rinci.</p>
                     <button type="button">Cek Rincian</button>
                 </div>
                 <div class="box">
                     <img src="total.png" alt="Total Angsuran">
                     <h3>Total Angsuran</h3>
-                    <p>Cek angsuran selanjutnya yang harus dibayarkan berdasarkan perhitungan dengan bunga.</p>
-                    <button type="button">Cek Total Angsuran</button>
+                    <p class="box-desc">Cek angsuran selanjutnya yang harus dibayarkan berdasarkan perhitungan dengan bunga.</p>
+                    <button type="button">Cek Total</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="#simulation">
+    <section id="simulation">
         <div class="container-fluid">
             <div class="simulation-text">
                 <h3 class="installment-desc">Simulasi Angsuran</h3>
                 <div class="simulation-desc">
                     <label for="angsuran">Angsuran yang dibayarkan</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="text" name="angsuran" id="angsuran" required>
-                    <button class="simulation-btn" type="button">Coba Bayar</button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="simulation-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Coba Bayar
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Tabel Angsuran</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table>
+                                        <tr>
+                                            <th>Periode</th>
+                                            <th>Angsuran Bunga</th>
+                                            <th>Angsuran Pokok</th>
+                                            <th>Angsuran Total</th>
+                                            <th>Sisa Angsuran</th>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Rp.000</td>
+                                            <td>Rp.000</td>
+                                            <td>Rp.000</td>
+                                            <td>Rp.000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Rp.000</td>
+                                            <td>Rp.000</td>
+                                            <td>Rp.000</td>
+                                            <td>Rp.000</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <section id = "modal">
-        <div class="container-fluid">
-            <table>
-                <tr>
-                    <th>Periode</th>
-                    <th>Angsuran Bunga</th>
-                    <th>Angsuran Pokok</th>
-                    <th>Angsuran Total</th>
-                    <th>Sisa Angsuran</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Rp.000</td>
-                    <td>Rp.000</td>
-                    <td>Rp.000</td>
-                    <td>Rp.000</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Rp.000</td>
-                    <td>Rp.000</td>
-                    <td>Rp.000</td>
-                    <td>Rp.000</td>
-                </tr>
-            </table>
-        </div>
-    </section>
-
 </body>
 
 </html>
