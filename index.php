@@ -172,19 +172,23 @@ session_start();
 
                                         $periode = (int)substr($tenor, 0, 2); #mengambil 2 karakter pertama
 
-                                        $angsuranpokok = $sisapinjaman/$periode;
+                                        $angsuranpokok = ceil($sisapinjaman/$periode);
 
                                         for ($i = 1; $i <= $periode ; $i++) {
                                             $angsuranbunga = ceil($sisapinjaman * $bunga );
-                                            $angsurantotal = $angsuranpokok + $angsuranbunga ;
+                                            $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
+                                            $angsuranbunga_v = number_format($angsuranbunga);
+                                            $angsuranpokok_v = number_format($angsuranpokok);
+                                            $angsurantotal_v = number_format($angsurantotal);
+                                            $sisapinjaman_v = number_format($sisapinjaman);
                                             echo"<tr>";
                                             echo"<td>$i</td>";
-                                            echo"<td>Rp.$angsuranbunga</td>";
-                                            echo"<td>Rp.$angsuranpokok</td>";
-                                            echo"<td>Rp.$angsurantotal</td>";
-                                            echo"<td>Rp.$sisapinjaman</td>";
+                                            echo"<td>Rp.$angsuranbunga_v</td>";
+                                            echo"<td>Rp.$angsuranpokok_v</td>";
+                                            echo"<td>Rp.$angsurantotal_v</td>";
+                                            echo"<td>Rp.$sisapinjaman_v</td>";
                                             echo"</tr>";
-                                            $sisapinjaman -= $angsuranpokok;
+                                            $sisapinjaman = ceil($sisapinjaman - $angsuranpokok);
 
                                         } ?>
                                     </table>
