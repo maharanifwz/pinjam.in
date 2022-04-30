@@ -236,6 +236,7 @@ session_start();
                                         );
 
                                         $angsuranpokok = ceil($sisapinjaman / $periode);
+                                        $totalangsuran = 0;
 
                                         foreach ($timeInterval as $key => $value) {
                                             echo "<table>
@@ -249,6 +250,7 @@ session_start();
                                                 </tr>";
                                             $angsuranbunga = ceil($sisapinjaman * $bunga);
                                             $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
+                                            $totalangsuran = $totalangsuran + $angsurantotal;
                                             $angsuranbunga_v = number_format($angsuranbunga);
                                             $angsuranpokok_v = number_format($angsuranpokok);
                                             $angsurantotal_v = number_format($angsurantotal);
@@ -297,7 +299,7 @@ session_start();
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        Total angsuran anda sebesar Rp <?php echo number_format($_POST['besarpinjaman']) ?>
+                                        Total angsuran anda sebesar Rp <?php echo number_format($totalangsuran) ?>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
