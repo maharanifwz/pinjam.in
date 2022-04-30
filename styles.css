@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0 auto;
@@ -31,7 +35,9 @@ p {
     font-size: 12px;
 }
 
+
 /* navbar */
+
 .wrapper {
     width: 90%;
     margin: 0 auto;
@@ -103,6 +109,7 @@ nav ul li:hover ul {
     position: absolute;
 }
 
+
 /* nav ul li:hover {
     
 } */
@@ -118,6 +125,7 @@ nav li a:hover {
 nav ul li ul {
     display: none;
 }
+
 
 /* login dan register */
 
@@ -219,7 +227,9 @@ ul {
     height: 100vh;
 }
 
+
 /* installment */
+
 .installment-title {
     text-align: center;
     align-items: center;
@@ -259,7 +269,9 @@ a {
     text-align: center;
 }
 
+
 /* menu */
+
 .box-container {
     display: flex;
     border: none;
@@ -287,7 +299,9 @@ a {
     margin-bottom: 0;
 }
 
+
 /* simulation */
+
 
 /* #simulation {
     background: url('footer.png');
@@ -311,7 +325,9 @@ a {
     margin-left: 25px;
 }
 
+
 /* Modal */
+
 #modal {
     width: 100%;
     /* display: none; */
@@ -325,7 +341,6 @@ table {
     border-collapse: collapse;
     overflow: hidden;
 }
-
 
 th,
 td {
@@ -345,4 +360,9 @@ tr:nth-child(odd) {
 
 .modal-dialog {
     padding-top: 7%;
+    margin-left: 13%;
+}
+
+.modal-content{
+    width: 950px;
 }
