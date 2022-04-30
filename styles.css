@@ -345,4 +345,9 @@ tr:nth-child(odd) {
 
 .modal-dialog {
     padding-top: 7%;
+    margin-left: 13%;
+}
+
+.modal-content{
+    width: 950px;
 }

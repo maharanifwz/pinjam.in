@@ -64,7 +64,7 @@ session_start();
             <h1 class="installment-title">SIMULASIKAN PINJAMAN ANDA</h1>
             <div class="installment-text">
                 <h2 class="installment-desc">Cari Tahu Angsuran Mu Disini</h2>
-                <form action="" method="POST">
+                <form action="#menu" method="POST">
                     <div>
                         <label for="besarpinjaman">Besar Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="text" name="besarpinjaman" id="besarpinjaman" required>
