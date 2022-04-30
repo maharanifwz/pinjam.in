@@ -160,22 +160,25 @@ session_start();
                                         $sisapinjaman  = $_POST['besarpinjaman'];
                                         $tenor  = $_POST['tenor'];
                                         $startdate = $_POST['tanggalpinjaman'];
-
+                                        $enddate = 0;
                                         $periode = (int)substr($tenor, 0, 2); #mengambil 2 karakter pertama
-
+                                        $DateInterval_construct = "";
                                         $bunga = 0;
                                         if (substr($tenor, -1) == 'm') { #mengambil karakter terakhir
                                             $bunga = 0.1;
-                                            $enddate = date('Y-m-d', strtotime($startdate . ' + ' . $periode . " months"));
+                                            $startdate = date("Y-m",strtotime($startdate));
+                                            $enddate = date('Y-m', strtotime($startdate . ' + ' . $periode . " months"));
+                                            $DateInterval_construct = "P1M";
                                         } else {
                                             $bunga = 0.005;
                                             $enddate = date('Y-m-d', strtotime($startdate . ' + ' . $periode . " days"));
+                                            $DateInterval_construct = "P1D";
                                         }
 
 
                                         $timeInterval = new DatePeriod(
                                             new DateTime($startdate),
-                                            new DateInterval('P1D'),
+                                            new DateInterval($DateInterval_construct),
                                             new DateTime($enddate)
                                         );
 
