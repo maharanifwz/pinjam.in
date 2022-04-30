@@ -4,6 +4,29 @@ include 'config.php';
 session_start();
 
 $totalangsuran = 0;
+
+if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
+    $pinjamanawal  = $_SESSION['besarpinjaman'];
+    $bunga = $_SESSION['bunga'];
+    $periode = $_SESSION['periode'];
+    $pinjamanPeriode1 = ($pinjamanawal / $periode) + ($pinjamanawal * $bunga);
+
+    if ((isset($_POST['angsuran'])) & ($_POST['angsuran'] < $pinjamanPeriode1)) {
+?>
+        <div class="alert alert-danger alert-warning alert-dismissible fade show" role="alert">
+            <div class="alert-position">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                </svg>
+                <div>Angsuran yang dibayarkan masih kurang dari target angsuran yang harus dibayarkan untuk periode pertama.</div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php
+    } else { ?>
+<!-- BIKIN ALERT IJO -->
+<?php }
+}
 ?>
 
 <!DOCTYPE html>
@@ -168,80 +191,72 @@ $totalangsuran = 0;
         </div>
     </section>
 
-    <section id="simulation">
-        <div class="container-fluid">
-            <div class="simulation-text">
-                <h3 class="installment-desc">Simulasi Angsuran</h3>
-                <div class="simulation-desc">
-                    <label for="angsuran">Angsuran yang dibayarkan</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" name="angsuran" id="angsuran" required>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="simulation-btn" data-bs-toggle="modal" data-bs-target="#detailsModal">
-                        Coba Bayar
-                    </button>
+    <section id="modal-container">
+        <!-- Details Modal -->
+        <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-                    <!-- Details Modal -->
-                    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
+                    <?php
 
-                                <?php
+                    if (isset($_POST['besarpinjaman'])) {
+                        $pinjamanawal  = $_POST['besarpinjaman'];
+                        $tenor  = $_POST['tenor'];
+                        $startdate = $_POST['tanggalpinjaman'];
 
-                                if (isset($_POST['besarpinjaman'])) {
-                                    $pinjamanawal  = $_POST['besarpinjaman'];
-                                    $tenor  = $_POST['tenor'];
-                                    $startdate = $_POST['tanggalpinjaman'];
+                        $_SESSION['besarpinjaman'] = $pinjamanawal;
+                        $_SESSION['tenor'] = $tenor;
+                        $_SESSION['tanggalpinjaman'] = $startdate;
+                    } else {
+                        $pinjamanawal  = $_SESSION['besarpinjaman'];
+                        $tenor  = $_SESSION['tenor'];
+                        $startdate = $_SESSION['tanggalpinjaman'];
+                    }
 
-                                    $_SESSION['besarpinjaman'] = $pinjamanawal;
-                                    $_SESSION['tenor'] = $tenor;
-                                    $_SESSION['tanggalpinjaman'] = $startdate;
-                                } else {
-                                    $pinjamanawal  = $_SESSION['besarpinjaman'];
-                                    $tenor  = $_SESSION['tenor'];
-                                    $startdate = $_SESSION['tanggalpinjaman'];
-                                }
+                    $sisapinjaman = $pinjamanawal;
+                    $enddate = 0;
 
-                                $sisapinjaman = $pinjamanawal;
-                                $enddate = 0;
-                                $periode = (int)substr($tenor, 0, 2); #mengambil 2 karakter pertama
-                                $DateInterval_construct = "";
-                                $bunga = 0;
-                                $Condition = true;
-                                if (substr($tenor, -1) == 'm') { #mengambil karakter terakhir
-                                    if ($pinjamanawal < 20000000) {
-                                        $Condition = false;
-                                    }
-                                    $bunga = 0.1;
-                                    $startdate = date("Y-m", strtotime($startdate));
-                                    $enddate = date('Y-m', strtotime($startdate . ' + ' . $periode . " months"));
-                                    $DateInterval_construct = "P1M";
-                                } else {
-                                    if ($pinjamanawal > 20000000) {
-                                        $Condition = false;
-                                    }
-                                    $bunga = 0.005;
-                                    $enddate = date('Y-m-d', strtotime($startdate . ' + ' . $periode . " days"));
-                                    $DateInterval_construct = "P1D";
-                                }
+                    $periode = (int)substr($tenor, 0, 2); #mengambil 2 karakter pertama
+                    $_SESSION['periode'] = $periode;
 
-                                if ($Condition) { ?>
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tabel Angsuran</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <?php
-                                        $timeInterval = new DatePeriod(
-                                            new DateTime($startdate),
-                                            new DateInterval($DateInterval_construct),
-                                            new DateTime($enddate)
-                                        );
+                    $DateInterval_construct = "";
+                    $bunga = 0;
+                    $Condition = true;
+                    if (substr($tenor, -1) == 'm') { #mengambil karakter terakhir
+                        if ($pinjamanawal < 20000000) {
+                            $Condition = false;
+                        }
+                        $bunga = 0.1;
+                        $startdate = date("Y-m", strtotime($startdate));
+                        $enddate = date('Y-m', strtotime($startdate . ' + ' . $periode . " months"));
+                        $DateInterval_construct = "P1M";
+                    } else {
+                        if ($pinjamanawal > 20000000) {
+                            $Condition = false;
+                        }
+                        $bunga = 0.005;
+                        $enddate = date('Y-m-d', strtotime($startdate . ' + ' . $periode . " days"));
+                        $DateInterval_construct = "P1D";
+                    }
+                    $_SESSION['bunga'] = $bunga;
+                    if ($Condition) { ?>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Tabel Angsuran</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <?php
+                            $timeInterval = new DatePeriod(
+                                new DateTime($startdate),
+                                new DateInterval($DateInterval_construct),
+                                new DateTime($enddate)
+                            );
 
-                                        $angsuranpokok = ceil($sisapinjaman / $periode);
-                                        
+                            $angsuranpokok = ceil($sisapinjaman / $periode);
 
-                                        foreach ($timeInterval as $key => $value) {
-                                            echo "<table>
+
+                            foreach ($timeInterval as $key => $value) {
+                                echo "<table>
 
                                                 <tr>
                                                     <th>Periode</th>
@@ -250,95 +265,92 @@ $totalangsuran = 0;
                                                     <th>Angsuran Total</th>
                                                     <th>Sisa Angsuran</th>
                                                 </tr>";
-                                            $angsuranbunga = ceil($sisapinjaman * $bunga);
-                                            $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
-                                            $totalangsuran += $angsurantotal;
-                                            $angsuranbunga_v = number_format($angsuranbunga);
-                                            $angsuranpokok_v = number_format($angsuranpokok);
-                                            $angsurantotal_v = number_format($angsurantotal);
-                                            $sisapinjaman = ceil($sisapinjaman - $angsuranpokok);
-                                            if ($sisapinjaman < 0) {
-                                                $sisapinjaman = 0;
-                                            }
-                                            $sisapinjaman_v = number_format($sisapinjaman);
-                                            $date = $value->format('Y-m-d');
-                                            echo "<tr>";
-                                            echo "<td>$date</td>";
-                                            echo "<td>Rp.$angsuranbunga_v</td>";
-                                            echo "<td>Rp.$angsuranpokok_v</td>";
-                                            echo "<td>Rp.$angsurantotal_v</td>";
-                                            echo "<td>Rp.$sisapinjaman_v</td>";
-                                            echo "</tr>";
-                                        }
-                                    } else { ?>
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Tabel Angsuran</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
+                                $angsuranbunga = ceil($sisapinjaman * $bunga);
+                                $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
+                                $totalangsuran += $angsurantotal;
+                                $angsuranbunga_v = number_format($angsuranbunga);
+                                $angsuranpokok_v = number_format($angsuranpokok);
+                                $angsurantotal_v = number_format($angsurantotal);
+                                $sisapinjaman = ceil($sisapinjaman - $angsuranpokok);
+                                if ($sisapinjaman < 0) {
+                                    $sisapinjaman = 0;
+                                }
+                                $sisapinjaman_v = number_format($sisapinjaman);
+                                $date = $value->format('Y-m-d');
+                                echo "<tr>";
+                                echo "<td>$date</td>";
+                                echo "<td>Rp.$angsuranbunga_v</td>";
+                                echo "<td>Rp.$angsuranpokok_v</td>";
+                                echo "<td>Rp.$angsurantotal_v</td>";
+                                echo "<td>Rp.$sisapinjaman_v</td>";
+                                echo "</tr>";
+                            }
+                        } else { ?>
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tabel Angsuran</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
 
-                                        <?php
-                                        echo "<h3>Untuk pinjaman dibawah 20 juta hanya dapat menggunakaan tenor harian sedangkan pinjaman
+                            <?php
+                            echo "<h3>Untuk pinjaman dibawah 20 juta hanya dapat menggunakaan tenor harian sedangkan pinjaman
                                                  diatas 20 juta hanya dapat menggunakaan tenor bulanan.</h3>";
-                                    }
+                        }
 
-                                        ?>
-                                        </table>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
+                            ?>
+                            </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
+                </div>
+            </div>
 
-                        <!-- Modal Total Angsuran -->
-                        <div class="modal fade" id="angsuranModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Total Angsuran</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Total angsuran anda sebesar Rp <?php echo number_format($totalangsuran) ?>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Modal Total Angsuran -->
+            <div class="modal fade" id="angsuranModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Total Angsuran</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-
-                        <!-- Modal Simulasi Angsur -->
-                        <div class="modal fade" id="simulasiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Simulasi Angsuran</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="" method="POST">
-                                            <label for="angsuran">Angsuran yang dibayarkan</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <input type="text" name="angsuran" id="angsuran" required>
-                                            <div class="center">
-                                                <input class="submit" id="simpan" type="submit" value="Bayar" name="bayar">
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="modal-body">
+                            Total angsuran anda sebesar Rp <?php echo number_format($totalangsuran) ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Modal Simulasi Angsur -->
+            <div class="modal fade" id="simulasiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Simulasi Angsuran</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="POST">
+                                <label for="angsuran">Angsuran yang dibayarkan</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="text" name="angsuran" id="angsuran" required>
+                                <div class="center">
+                                    <input class="submit" id="simpan" type="submit" value="Bayar" name="bayar">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </section>
-
-
 </body>
 
 </html>
