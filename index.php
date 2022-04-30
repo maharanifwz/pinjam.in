@@ -51,7 +51,7 @@ session_start();
 
             <div class="title">
                 <h1 class="heading">Hadir untuk mempermudah anda dalam merencanakan finansial anda.</h1>
-                <p class="heading-desc">Ingin mengetahui bagaimana pinjaman yang kamu ambil akan membebani 
+                <p class="heading-desc">Ingin mengetahui bagaimana pinjaman yang kamu ambil akan membebani
                     finansial mu kedepannya? Coba pinjamin untuk melihat rencana pinjaman mu!</p>
                 <button type="button">Mulai</button>
             </div>
@@ -64,72 +64,82 @@ session_start();
             <h1 class="installment-title">SIMULASIKAN PINJAMAN ANDA</h1>
             <div class="installment-text">
                 <h2 class="installment-desc">Cari Tahu Angsuran Mu Disini</h2>
-                <div>
-                    <label for="besarpinjaman">Besar Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" name="besarpinjaman" id="besarpinjaman" required>
-                </div>
-                <div>
-                    <!-- <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <form action="" method="POST">
+                    <div>
+                        <label for="besarpinjaman">Besar Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="besarpinjaman" id="besarpinjaman" required>
+                    </div>
+                    <div>
+                        <!-- <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="text" name="tenorpinjaman" id="tenorpinjaman" required> -->
-                    <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="tenor" id="tenor">
-                        <option value="">--Silahkan pilih tenor yang tersedia--</option>
-                        <option value="hari">Hari</option>
-                        <option value="bulan">Bulan</option>
-                    </select>
-                    <br>
-                </div>
-                <div>
-                    <label for="tanggalpinjaman">Tanggal Pinjaman</label>&nbsp;&nbsp;&nbsp;
-                    <input type="date" name="tanggalpinjaman" id="tanggalpinjaman" required>
-                </div>
-                <div class="center">
-                    <input class="submit" type="submit" value="Simpan Data Pinjaman" name="Simpan Data">
-                </div>
+                        <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="tenor" id="tenor">
+                            <option value="">--Silahkan pilih tenor yang tersedia--</option>
+                            <option value="03d">3 Hari</option>
+                            <option value="07d">7 hari</option>
+                            <option value="14d">14 Hari</option>
+                            <option value="30d">30 Hari</option>
+                            <option value="3m">3 Bulan</option>
+                            <option value="6m">6 Bulan</option>
+                            <option value="12m">12 Bulan</option>
+                        </select>
+                        <br>
+                    </div>
+                    <div>
+                        <label for="tanggalpinjaman">Tanggal Pinjaman</label>&nbsp;&nbsp;&nbsp;
+                        <input type="date" name="tanggalpinjaman" id="tanggalpinjaman" required>
+                    </div>
+                    <div class="center">
+                        <input class="submit" type="submit" value="Simpan Data Pinjaman" name="simpanData">
+                    </div>
+                </form>
             </div>
         </div>
     </section>
+    <?php
+    if (isset($_POST['simpanData'])) {
 
-    <section id="menu">
-        <div class="container-fluid">
-            <h1 class="installment-title">CARI TAHU KEBUTUHANMU</h1>
-            <div class="box-container">
-                <div class="box">
-                    <img src="simulasi.png" alt="Simulasi Angsuran">
-                    <h3>Simulasi Angsuran</h3>
-                    <p class="box-desc">Cek bagaimana angsuran yang harus dibayarkan secara efektif perbulannya beserta bunga nya.</p>
-                    <button type="button">Coba Bayar</button>
-                </div>
-                <div class="box">
-                    <img src="rincian.png" alt="Rincian Angsuran">
-                    <h3>Rincian Angsuran</h3>
-                    <p class="box-desc">Cek bagaimana perhitungan angsuran yang harus dibayarkan perbulannya secara rinci.</p>
-                    <button type="button">Cek Rincian</button>
-                </div>
-                <div class="box">
-                    <img src="total.png" alt="Total Angsuran">
-                    <h3>Total Angsuran</h3>
-                    <p class="box-desc">Cek angsuran selanjutnya yang harus dibayarkan berdasarkan perhitungan dengan bunga.</p>
-                    <button type="button">Cek Total</button>
+    ?>
+        <section id="menu">
+            <div class="container-fluid">
+                <h1 class="installment-title">CARI TAHU KEBUTUHANMU</h1>
+                <div class="box-container">
+                    <div class="box">
+                        <img src="simulasi.png" alt="Simulasi Angsuran">
+                        <h3>Simulasi Angsuran</h3>
+                        <p class="box-desc">Cek bagaimana angsuran yang harus dibayarkan secara efektif perbulannya beserta bunga nya.</p>
+                        <button type="button">Coba Bayar</button>
+                    </div>
+                    <div class="box">
+                        <img src="rincian.png" alt="Rincian Angsuran">
+                        <h3>Rincian Angsuran</h3>
+                        <p class="box-desc">Cek bagaimana perhitungan angsuran yang harus dibayarkan perbulannya secara rinci.</p>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#detailsModal">Cek Rincian</button>
+                    </div>
+                    <div class="box">
+                        <img src="total.png" alt="Total Angsuran">
+                        <h3>Total Angsuran</h3>
+                        <p class="box-desc">Cek angsuran selanjutnya yang harus dibayarkan berdasarkan perhitungan dengan bunga.</p>
+                        <button type="button">Cek Total</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="simulation">
-        <div class="container-fluid">
-            <div class="simulation-text">
-                <h3 class="installment-desc">Simulasi Angsuran</h3>
-                <div class="simulation-desc">
-                    <label for="angsuran">Angsuran yang dibayarkan</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" name="angsuran" id="angsuran" required>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="simulation-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Coba Bayar
-                    </button>
-
+        <section id="simulation">
+            <div class="container-fluid">
+                <div class="simulation-text">
+                    <h3 class="installment-desc">Simulasi Angsuran</h3>
+                    <div class="simulation-desc">
+                        <label for="angsuran">Angsuran yang dibayarkan</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="angsuran" id="angsuran" required>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="simulation-btn" data-bs-toggle="modal" data-bs-target="#detailsModal">
+                            Coba Bayar
+                        </button>
+                    <?php } ?>
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -138,6 +148,7 @@ session_start();
                                 </div>
                                 <div class="modal-body">
                                     <table>
+
                                         <tr>
                                             <th>Periode</th>
                                             <th>Angsuran Bunga</th>
@@ -145,27 +156,37 @@ session_start();
                                             <th>Angsuran Total</th>
                                             <th>Sisa Angsuran</th>
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Rp.000</td>
-                                            <td>Rp.000</td>
-                                            <td>Rp.000</td>
-                                            <td>Rp.000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Rp.000</td>
-                                            <td>Rp.000</td>
-                                            <td>Rp.000</td>
-                                            <td>Rp.000</td>
-                                        </tr>
+
+                                        <?php
+
+                                        $sisapinjaman  = $_POST['besarpinjaman'];
+                                        $tenor  = $_POST['tenor'];
+                                        $lastdate = $_POST['tanggalpinjaman'];
+                                        
+                                        $bunga = 0;
+                                        if (substr($tenor, -1) == 'm') { #mengambil karakter terakhir
+                                            $bunga = 0.1;
+                                        } else {
+                                            $bunga = 0.005;
+                                        }
+
+                                        $periode = (int)substr($tenor, 0, 2); #mengambil 2 karakter pertama
+
+                                        $angsuranpokok = $sisapinjaman/$periode;
+
+                                        for ($i = 1; $i <= $periode ; $i++) {
+                                            $angsuranbunga = ceil($sisapinjaman * $bunga );
+                                            $angsurantotal = $angsuranpokok + $angsuranbunga ;
+                                            echo"<tr>";
+                                            echo"<td>$i</td>";
+                                            echo"<td>Rp.$angsuranbunga</td>";
+                                            echo"<td>Rp.$angsuranpokok</td>";
+                                            echo"<td>Rp.$angsurantotal</td>";
+                                            echo"<td>Rp.$sisapinjaman</td>";
+                                            echo"</tr>";
+                                            $sisapinjaman -= $angsuranpokok;
+
+                                        } ?>
                                     </table>
                                 </div>
                                 <div class="modal-footer">
@@ -174,10 +195,10 @@ session_start();
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 </body>
 
 </html>
