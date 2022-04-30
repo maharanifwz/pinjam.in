@@ -159,36 +159,46 @@ session_start();
 
                                         $sisapinjaman  = $_POST['besarpinjaman'];
                                         $tenor  = $_POST['tenor'];
-                                        $lastdate = $_POST['tanggalpinjaman'];
-                                        
-                                        $bunga = 0;
-                                        if (substr($tenor, -1) == 'm') { #mengambil karakter terakhir
-                                            $bunga = 0.1;
-                                        } else {
-                                            $bunga = 0.005;
-                                        }
+                                        $startdate = $_POST['tanggalpinjaman'];
 
                                         $periode = (int)substr($tenor, 0, 2); #mengambil 2 karakter pertama
 
-                                        $angsuranpokok = ceil($sisapinjaman/$periode);
+                                        $bunga = 0;
+                                        if (substr($tenor, -1) == 'm') { #mengambil karakter terakhir
+                                            $bunga = 0.1;
+                                            $enddate = date('Y-m-d', strtotime($startdate . ' + ' . $periode . " months"));
+                                        } else {
+                                            $bunga = 0.005;
+                                            $enddate = date('Y-m-d', strtotime($startdate . ' + ' . $periode . " days"));
+                                        }
 
-                                        for ($i = 1; $i <= $periode ; $i++) {
-                                            $angsuranbunga = ceil($sisapinjaman * $bunga );
+
+                                        $timeInterval = new DatePeriod(
+                                            new DateTime($startdate),
+                                            new DateInterval('P1D'),
+                                            new DateTime($enddate)
+                                        );
+
+                                        $angsuranpokok = ceil($sisapinjaman / $periode);
+
+                                        foreach ($timeInterval as $key => $value) {
+                                            $angsuranbunga = ceil($sisapinjaman * $bunga);
                                             $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
                                             $angsuranbunga_v = number_format($angsuranbunga);
                                             $angsuranpokok_v = number_format($angsuranpokok);
                                             $angsurantotal_v = number_format($angsurantotal);
                                             $sisapinjaman_v = number_format($sisapinjaman);
-                                            echo"<tr>";
-                                            echo"<td>$i</td>";
-                                            echo"<td>Rp.$angsuranbunga_v</td>";
-                                            echo"<td>Rp.$angsuranpokok_v</td>";
-                                            echo"<td>Rp.$angsurantotal_v</td>";
-                                            echo"<td>Rp.$sisapinjaman_v</td>";
-                                            echo"</tr>";
+                                            $date = $value->format('Y-m-d');
+                                            echo "<tr>";
+                                            echo "<td>$date</td>";
+                                            echo "<td>Rp.$angsuranbunga_v</td>";
+                                            echo "<td>Rp.$angsuranpokok_v</td>";
+                                            echo "<td>Rp.$angsurantotal_v</td>";
+                                            echo "<td>Rp.$sisapinjaman_v</td>";
+                                            echo "</tr>";
                                             $sisapinjaman = ceil($sisapinjaman - $angsuranpokok);
-
-                                        } ?>
+                                        }
+                                        ?>
                                     </table>
                                 </div>
                                 <div class="modal-footer">
