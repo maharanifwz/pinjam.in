@@ -53,7 +53,8 @@ session_start();
                 <h1 class="heading">Hadir untuk mempermudah anda dalam merencanakan finansial anda.</h1>
                 <p class="heading-desc">Ingin mengetahui bagaimana pinjaman yang kamu ambil akan membebani
                     finansial mu kedepannya? Coba pinjamin untuk melihat rencana pinjaman mu!</p>
-                <button type="button">Mulai</button>
+                <a href="#installment"><button type="button">Mulai</button></a>
+                    
             </div>
 
         </div>
@@ -64,7 +65,7 @@ session_start();
             <h1 class="installment-title">SIMULASIKAN PINJAMAN ANDA</h1>
             <div class="installment-text">
                 <h2 class="installment-desc">Cari Tahu Angsuran Mu Disini</h2>
-                <form action="#menu" method="POST">
+                <form action="" method="POST">
                     <div>
                         <label for="besarpinjaman">Besar Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="text" name="besarpinjaman" id="besarpinjaman" required>
@@ -90,16 +91,13 @@ session_start();
                         <input type="date" name="tanggalpinjaman" id="tanggalpinjaman" required>
                     </div>
                     <div class="center">
-                        <input class="submit" type="submit" value="Simpan Data Pinjaman" name="simpanData">
+                        <input class="submit" id="simpan" type="submit" value="Simpan Data Pinjaman" name="simpanData">
                     </div>
                 </form>
             </div>
         </div>
     </section>
-    <?php
-    if (isset($_POST['simpanData'])) {
-
-    ?>
+   
         <section id="menu">
             <div class="container-fluid">
                 <h1 class="installment-title">CARI TAHU KEBUTUHANMU</h1>
@@ -137,7 +135,7 @@ session_start();
                         <button type="button" class="simulation-btn" data-bs-toggle="modal" data-bs-target="#detailsModal">
                             Coba Bayar
                         </button>
-                    <?php } ?>
+                   
                     <!-- Modal -->
                     <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -203,6 +201,8 @@ session_start();
                 </div>
             </div>
         </section>
+
+    
 </body>
 
 </html>
