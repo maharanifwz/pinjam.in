@@ -167,8 +167,8 @@ option {
     margin-bottom: 25px;
 }
 
-select {
-    width: 323px;
+select, option {
+    width: 300px;
     height: 32px;
 }
 
