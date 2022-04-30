@@ -176,9 +176,9 @@ session_start();
 
 
                                         $timeInterval = new DatePeriod(
-                                            new DateTime('2010-10-01'),
+                                            new DateTime($startdate),
                                             new DateInterval('P1D'),
-                                            new DateTime('2010-10-05')
+                                            new DateTime($enddate)
                                         );
 
                                         $angsuranpokok = ceil($sisapinjaman / $periode);
@@ -200,24 +200,6 @@ session_start();
                                             echo "</tr>";
                                             $sisapinjaman = ceil($sisapinjaman - $angsuranpokok);
                                         }
-
-                                        // for ($i = 1; $i <= $periode ; $i++) {
-                                        //     $angsuranbunga = ceil($sisapinjaman * $bunga );
-                                        //     $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
-                                        //     $angsuranbunga_v = number_format($angsuranbunga);
-                                        //     $angsuranpokok_v = number_format($angsuranpokok);
-                                        //     $angsurantotal_v = number_format($angsurantotal);
-                                        //     $sisapinjaman_v = number_format($sisapinjaman);
-                                        //     echo"<tr>";
-                                        //     echo"<td>$i</td>";
-                                        //     echo"<td>Rp.$angsuranbunga_v</td>";
-                                        //     echo"<td>Rp.$angsuranpokok_v</td>";
-                                        //     echo"<td>Rp.$angsurantotal_v</td>";
-                                        //     echo"<td>Rp.$sisapinjaman_v</td>";
-                                        //     echo"</tr>";
-                                        //     $sisapinjaman = ceil($sisapinjaman - $angsuranpokok);
-
-                                        // } 
                                         ?>
                                     </table>
                                 </div>
