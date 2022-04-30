@@ -51,7 +51,7 @@ session_start();
 
             <div class="title">
                 <h1 class="heading">Hadir untuk mempermudah anda dalam merencanakan finansial anda.</h1>
-                <p class="heading-desc">Ingin mengetahui bagaimana pinjaman yang kamu ambil akan membebani 
+                <p class="heading-desc">Ingin mengetahui bagaimana pinjaman yang kamu ambil akan membebani
                     finansial mu kedepannya? Coba pinjamin untuk melihat rencana pinjaman mu!</p>
                 <button type="button">Mulai</button>
             </div>
@@ -73,7 +73,7 @@ session_start();
                     <input type="text" name="tenorpinjaman" id="tenorpinjaman" required> -->
                     <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <select name="tenor" id="tenor">
-                        <option value="">--Silahkan pilih tenor yang tersedia--</option>
+                        <option value="">--Silahkan pilih tenor--</option>
                         <option value="hari">Hari</option>
                         <option value="bulan">Bulan</option>
                     </select>
@@ -110,7 +110,25 @@ session_start();
                     <img src="total.png" alt="Total Angsuran">
                     <h3>Total Angsuran</h3>
                     <p class="box-desc">Cek angsuran selanjutnya yang harus dibayarkan berdasarkan perhitungan dengan bunga.</p>
-                    <button type="button">Cek Total</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Cek Total
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Total Angsuran</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Total angsuran anda sebesar Rp
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
