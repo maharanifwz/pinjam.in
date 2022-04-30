@@ -54,7 +54,7 @@ session_start();
                 <p class="heading-desc">Ingin mengetahui bagaimana pinjaman yang kamu ambil akan membebani
                     finansial mu kedepannya? Coba pinjamin untuk melihat rencana pinjaman mu!</p>
                 <a href="#installment"><button type="button">Mulai</button></a>
-                    
+
             </div>
 
         </div>
@@ -97,45 +97,48 @@ session_start();
             </div>
         </div>
     </section>
-   
-        <section id="menu">
-            <div class="container-fluid">
-                <h1 class="installment-title">CARI TAHU KEBUTUHANMU</h1>
-                <div class="box-container">
-                    <div class="box">
-                        <img src="simulasi.png" alt="Simulasi Angsuran">
-                        <h3>Simulasi Angsuran</h3>
-                        <p class="box-desc">Cek bagaimana angsuran yang harus dibayarkan secara efektif perbulannya beserta bunga nya.</p>
-                        <button type="button">Coba Bayar</button>
-                    </div>
-                    <div class="box">
-                        <img src="rincian.png" alt="Rincian Angsuran">
-                        <h3>Rincian Angsuran</h3>
-                        <p class="box-desc">Cek bagaimana perhitungan angsuran yang harus dibayarkan perbulannya secara rinci.</p>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#detailsModal">Cek Rincian</button>
-                    </div>
-                    <div class="box">
-                        <img src="total.png" alt="Total Angsuran">
-                        <h3>Total Angsuran</h3>
-                        <p class="box-desc">Cek angsuran selanjutnya yang harus dibayarkan berdasarkan perhitungan dengan bunga.</p>
-                        <button type="button">Cek Total</button>
-                    </div>
+
+    <section id="menu">
+        <div class="container-fluid">
+            <h1 class="installment-title">CARI TAHU KEBUTUHANMU</h1>
+            <div class="box-container">
+                <div class="box">
+                    <img src="simulasi.png" alt="Simulasi Angsuran">
+                    <h3>Simulasi Angsuran</h3>
+                    <p class="box-desc">Cek bagaimana angsuran yang harus dibayarkan secara efektif perbulannya beserta bunga nya.</p>
+                    <button type="button">Coba Bayar</button>
+                </div>
+                <div class="box">
+                    <img src="rincian.png" alt="Rincian Angsuran">
+                    <h3>Rincian Angsuran</h3>
+                    <p class="box-desc">Cek bagaimana perhitungan angsuran yang harus dibayarkan perbulannya secara rinci.</p>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#detailsModal">Cek Rincian</button>
+                </div>
+                <div class="box">
+                    <img src="total.png" alt="Total Angsuran">
+                    <h3>Total Angsuran</h3>
+                    <p class="box-desc">Cek angsuran selanjutnya yang harus dibayarkan berdasarkan perhitungan dengan bunga.</p>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#angsuranModal">
+                        Cek Total
+                    </button>
+
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="simulation">
-            <div class="container-fluid">
-                <div class="simulation-text">
-                    <h3 class="installment-desc">Simulasi Angsuran</h3>
-                    <div class="simulation-desc">
-                        <label for="angsuran">Angsuran yang dibayarkan</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="text" name="angsuran" id="angsuran" required>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="simulation-btn" data-bs-toggle="modal" data-bs-target="#detailsModal">
-                            Coba Bayar
-                        </button>
-                   
+    <section id="simulation">
+        <div class="container-fluid">
+            <div class="simulation-text">
+                <h3 class="installment-desc">Simulasi Angsuran</h3>
+                <div class="simulation-desc">
+                    <label for="angsuran">Angsuran yang dibayarkan</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="angsuran" id="angsuran" required>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="simulation-btn" data-bs-toggle="modal" data-bs-target="#detailsModal">
+                        Coba Bayar
+                    </button>
+
                     <!-- Modal -->
                     <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -166,7 +169,7 @@ session_start();
                                         $bunga = 0;
                                         if (substr($tenor, -1) == 'm') { #mengambil karakter terakhir
                                             $bunga = 0.1;
-                                            $startdate = date("Y-m",strtotime($startdate));
+                                            $startdate = date("Y-m", strtotime($startdate));
                                             $enddate = date('Y-m', strtotime($startdate . ' + ' . $periode . " months"));
                                             $DateInterval_construct = "P1M";
                                         } else {
@@ -210,12 +213,29 @@ session_start();
                             </div>
                         </div>
                     </div>
+                    <!-- Modal Total Angsuran -->
+                    <div class="modal fade" id="angsuranModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Total Angsuran</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Total angsuran anda sebesar Rp
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    
+
 </body>
 
 </html>
