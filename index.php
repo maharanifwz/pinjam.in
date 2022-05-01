@@ -63,8 +63,6 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800;900&display=swap" rel="stylesheet">
 
-    <!-- Link Font Awesome -->
-    <!-- <script src="https://kit.fontawesome.com/b101a09b96.js" crossorigin="anonymous"></script> -->
 </head>
 
 <body>
@@ -115,8 +113,6 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                             <input type="text" name="besarpinjaman" id="besarpinjaman" value="<?php echo "RP." . number_format($_SESSION["besarpinjaman"]) ?>" required>
                         </div>
                         <div>
-                            <!-- <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" name="tenorpinjaman" id="tenorpinjaman" required> -->
                             <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <select name="tenor" id="tenor">
                                 <option value="">--Silahkan pilih tenor yang tersedia--</option>
@@ -144,8 +140,6 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                             <input type="text" name="besarpinjaman" id="besarpinjaman" required>
                         </div>
                         <div>
-                            <!-- <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" name="tenorpinjaman" id="tenorpinjaman" required> -->
                             <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <select name="tenor" id="tenor">
                                 <option value="">--Silahkan pilih tenor yang tersedia--</option>
