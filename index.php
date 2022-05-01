@@ -91,8 +91,14 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                 <h1 class="heading">Hadir untuk mempermudah anda dalam merencanakan finansial anda.</h1>
                 <p class="heading-desc">Ingin mengetahui bagaimana pinjaman yang kamu ambil akan membebani
                     finansial mu kedepannya? Coba pinjamin untuk melihat rencana pinjaman mu!</p>
-                <a href="#installment"><button type="button">Mulai</button></a>
-
+                <?php if (isset($_SESSION['state'])) { ?>
+                    <a href="#installment"><button type="button">Mulai</button></a>
+                <?php
+                }else {
+                ?>
+                    <a href="login.php"><button type="button">Mulai</button></a>
+                
+                <?php } ?>
             </div>
 
         </div>
