@@ -180,19 +180,19 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
             <h1 class="installment-title">CARI TAHU KEBUTUHANMU</h1>
             <div class="box-container">
                 <div class="box">
-                    <img src="simulasi.png" alt="Simulasi Angsuran">
+                    <img src="/img/simulasi.png" alt="Simulasi Angsuran">
                     <h3>Simulasi Angsuran</h3>
                     <p class="box-desc">Cek bagaimana angsuran yang harus dibayarkan secara efektif perbulannya beserta bunga nya.</p>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#simulasiModal">Coba Bayar</button>
                 </div>
                 <div class="box">
-                    <img src="rincian.png" alt="Rincian Angsuran">
+                    <img src="/img/rincian.png" alt="Rincian Angsuran">
                     <h3>Rincian Angsuran</h3>
                     <p class="box-desc">Cek bagaimana perhitungan angsuran yang harus dibayarkan perbulannya secara rinci.</p>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#detailsModal">Cek Rincian</button>
                 </div>
                 <div class="box">
-                    <img src="total.png" alt="Total Angsuran">
+                    <img src="/img/total.png" alt="Total Angsuran">
                     <h3>Total Angsuran</h3>
                     <p class="box-desc">Cek angsuran selanjutnya yang harus dibayarkan berdasarkan perhitungan dengan bunga.</p>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#angsuranModal">

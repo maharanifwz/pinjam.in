@@ -142,14 +142,14 @@ label {
 }
 
 .login {
-    background: url('login.png');
+    background: url('/img/login.png');
     background-position: right;
     background-repeat: no-repeat;
     height: 100vh;
 }
 
 .register {
-    background: url('register.png');
+    background: url('/img/register.png');
     background-position: right;
     background-repeat: no-repeat;
     height: 100vh;
@@ -221,7 +221,7 @@ ul {
 }
 
 #home {
-    background: url('homepage.png');
+    background: url('/img/homepage.png');
     background-position: right;
     background-repeat: no-repeat;
     background-size: contain;
@@ -274,7 +274,7 @@ a {
 /* menu */
 
 #menu {
-    background: url('footer.png');
+    background: url('/img/footer.png');
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: contain;
