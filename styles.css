@@ -142,7 +142,7 @@ label {
 }
 
 .login {
-    background: url('/img/login.png');
+    background: url('C:\xampp\htdocs\pinjam.in\img\login.png');
     background-position: right;
     background-repeat: no-repeat;
     height: 100vh;
@@ -197,7 +197,8 @@ span {
     color: #FF8435;
 }
 
-.navbar, .alert-position {
+.navbar,
+.alert-position {
     display: flex;
 }
 
@@ -310,6 +311,7 @@ a {
 
 
 /* simulation */
+
 .simulation-text {
     width: 900px;
     height: 125px;

@@ -4,10 +4,6 @@ include 'config.php';
 
 session_start();
 
-// if (isset($_SESSION['username'])) {
-//     header("Location: index.php");
-// }
-
 if (isset($_POST['Register'])) {
     $nama = $_POST['name'];
     $email = $_POST['email'];
