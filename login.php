@@ -1,41 +1,31 @@
 <?php
 include 'config.php';
+require_once "login_control.php";
 
-session_start();
+// session_start();
 
 if (isset($_POST['Masuk'])) {
-    // echo "<script>alert('username anda = ' . )</script>";
-
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    global $mysqli;
-    $sqlquery = "SELECT * FROM pengguna WHERE username = '$username'";
-    $rs = $mysqli->query($sqlquery);
-    if (!$rs) {
+    $login = new login_control();
+
+    $login_valid = $login->login($username, $password);
+
+    if (strcmp($login_valid, 'query error') == 0) {
+        echo "<script>alert('Sesuatu Error. Silahkan coba lagi!')</script>";
         header("Location: login.php");
-        return;
-    }
-
-    $data = $rs->fetch_assoc();
-
-    if ($rs->num_rows > 0) {
-        if ($data['password'] != $password) {
-            echo "<script>alert('Password Anda salah. Silahkan coba lagi!')</script>";
-            return;
-        } else {
-            $_SESSION['username'] = $username;
-            $_SESSION['password'] = $password;
-            $_SESSION['state'] = true;
-            header("Location: index.php");
-        }
-    }else{
+    } else if (strcmp($login_valid, 'username unidentified') == 0) {
         echo "<script>alert('Username Tidak Dikenali. Silahkan coba lagi!')</script>";
-        $_POST['username'] = NULL;
-        $_POST['password'] = NULL;
-        $username = "";
-        $password = "";
+        header("Location: login.php");
+    } else if (strcmp($login_valid, 'wrong password') == 0) {
+        echo "<script>alert('Password Anda salah. Silahkan coba lagi!')</script>";
+        header("Location: login.php");
+    } else if (strcmp($login_valid, 'success') == 0) {
+        echo "<script>alert('Password Anda salah. Silahkan coba lagi!')</script>";
+        header("Location: index.php");
     }
+
 }
 
 ?>
