@@ -1,6 +1,6 @@
 <?php
 include 'config.php';
-
+require 'transaksiController.php';
 session_start();
 
 $totalangsuran = 0;
@@ -183,7 +183,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                     <img src="/img/simulasi.png" alt="Simulasi Angsuran">
                     <h3>Simulasi Angsuran</h3>
                     <p class="box-desc">Cek bagaimana angsuran yang harus dibayarkan secara efektif perbulannya beserta bunga nya.</p>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#simulasiModal">Coba Bayar</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#simulasiModal">Coba bayar</button>
                 </div>
                 <div class="box">
                     <img src="/img/rincian.png" alt="Rincian Angsuran">
@@ -211,7 +211,10 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                 <div class="modal-content">
 
                     <?php
-
+                    // $besarPinjaman = $_POST['besarpinjaman'];
+                    $trControll = new transaction();
+                    // $trControll->addData();
+                    //input data pinjaman//
                     if (isset($_POST['besarpinjaman'])) {
                         $pinjamanawal  = $_POST['besarpinjaman'];
                         $tenor  = $_POST['tenor'];
@@ -226,6 +229,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                         $startdate = $_SESSION['tanggalpinjaman'];
                     }
 
+                    
                     $sisapinjaman = $pinjamanawal;
                     $enddate = 0;
 
@@ -251,6 +255,8 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                         $enddate = date('Y-m-d', strtotime($startdate . ' + ' . $periode . " days"));
                         $DateInterval_construct = "P1D";
                     }
+
+                    //rincian angsuran//
                     $_SESSION['bunga'] = $bunga;
                     if ($Condition) { ?>
                         <div class="modal-header">
@@ -259,45 +265,48 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                         </div>
                         <div class="modal-body">
                             <?php
-                            $timeInterval = new DatePeriod(
-                                new DateTime($startdate),
-                                new DateInterval($DateInterval_construct),
-                                new DateTime($enddate)
-                            );
+                            $date = array($startdate, $DateInterval_construct, $enddate);
+                            $pinjaman = array($sisapinjaman, $periode);
+                            $trControll->rincian($date, $pinjaman);
+                            // $timeInterval = new DatePeriod(
+                            //     new DateTime($startdate),
+                            //     new DateInterval($DateInterval_construct),
+                            //     new DateTime($enddate)
+                            // );
 
-                            $angsuranpokok = ceil($sisapinjaman / $periode);
+                            // $angsuranpokok = ceil($sisapinjaman / $periode);
 
 
-                            foreach ($timeInterval as $key => $value) {
-                                echo "<table>
+                            // foreach ($timeInterval as $key => $value) {
+                            //     echo "<table>
 
-                                                <tr>
-                                                    <th>Periode</th>
-                                                    <th>Angsuran Bunga</th>
-                                                    <th>Angsuran Pokok</th>
-                                                    <th>Angsuran Total</th>
-                                                    <th>Sisa Angsuran</th>
-                                                </tr>";
-                                $angsuranbunga = ceil($sisapinjaman * $bunga);
-                                $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
-                                $totalangsuran += $angsurantotal;
-                                $angsuranbunga_v = number_format($angsuranbunga);
-                                $angsuranpokok_v = number_format($angsuranpokok);
-                                $angsurantotal_v = number_format($angsurantotal);
-                                $sisapinjaman = ceil($sisapinjaman - $angsuranpokok);
-                                if ($sisapinjaman < 0) {
-                                    $sisapinjaman = 0;
-                                }
-                                $sisapinjaman_v = number_format($sisapinjaman);
-                                $date = $value->format('Y-m-d');
-                                echo "<tr>";
-                                echo "<td>$date</td>";
-                                echo "<td>Rp.$angsuranbunga_v</td>";
-                                echo "<td>Rp.$angsuranpokok_v</td>";
-                                echo "<td>Rp.$angsurantotal_v</td>";
-                                echo "<td>Rp.$sisapinjaman_v</td>";
-                                echo "</tr>";
-                            }
+                            //                     <tr>
+                            //                         <th>Periode</th>
+                            //                         <th>Angsuran Bunga</th>
+                            //                         <th>Angsuran Pokok</th>
+                            //                         <th>Angsuran Total</th>
+                            //                         <th>Sisa Angsuran</th>
+                            //                     </tr>";
+                            //     $angsuranbunga = ceil($sisapinjaman * $bunga);
+                            //     $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
+                            //     $totalangsuran += $angsurantotal;
+                            //     $angsuranbunga_v = number_format($angsuranbunga);
+                            //     $angsuranpokok_v = number_format($angsuranpokok);
+                            //     $angsurantotal_v = number_format($angsurantotal);
+                            //     $sisapinjaman = ceil($sisapinjaman - $angsuranpokok);
+                            //     if ($sisapinjaman < 0) {
+                            //         $sisapinjaman = 0;
+                            //     }
+                            //     $sisapinjaman_v = number_format($sisapinjaman);
+                            //     $date = $value->format('Y-m-d');
+                            //     echo "<tr>";
+                            //     echo "<td>$date</td>";
+                            //     echo "<td>Rp.$angsuranbunga_v</td>";
+                            //     echo "<td>Rp.$angsuranpokok_v</td>";
+                            //     echo "<td>Rp.$angsurantotal_v</td>";
+                            //     echo "<td>Rp.$sisapinjaman_v</td>";
+                            //     echo "</tr>";
+                            // }
                         } else { ?>
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Tabel Angsuran</h5>
@@ -320,6 +329,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                 </div>
             </div>
 
+            //TOTAL ANGSURAN//
             <!-- Modal Total Angsuran -->
             <div class="modal fade" id="angsuranModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -329,7 +339,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Total angsuran anda sebesar Rp <?php echo number_format($totalangsuran) ?>
+                            Total angsuran anda sebesar Rp <?php $trControll->total($totalangsuran)  ?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -351,7 +361,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                                 <label for="angsuran">Angsuran yang dibayarkan</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <input type="text" name="angsuran" id="angsuran" required>
                                 <div class="center">
-                                    <input class="submit" id="simpan" type="submit" value="Bayar" name="bayar">
+                                    <input class="submit" id="simpan" type="submit" value="bayar" name="bayar">
                                 </div>
                             </form>
                         </div>

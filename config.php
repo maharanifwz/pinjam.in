@@ -1,6 +1,6 @@
 <?php 
  
-$mysqli = new mysqli('localhost', 'root', '1234567', 'pinjamin');
+$mysqli = new mysqli('localhost', 'root', '', 'pinjamin');
  
 if (!$mysqli) {
     die("<script>alert('Gagal tersambung dengan database.')</script>");
