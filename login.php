@@ -12,17 +12,7 @@ if (isset($_POST['Masuk'])) {
 
     $login_valid = $login->login($username, $password);
 
-    if (strcmp($login_valid, 'query error') == 0) {
-        echo "<script>alert('Sesuatu Error. Silahkan coba lagi!')</script>";
-        header("Location: login.php");
-    } else if (strcmp($login_valid, 'username unidentified') == 0) {
-        echo "<script>alert('Username Tidak Dikenali. Silahkan coba lagi!')</script>";
-        header("Location: login.php");
-    } else if (strcmp($login_valid, 'wrong password') == 0) {
-        echo "<script>alert('Password Anda salah. Silahkan coba lagi!')</script>";
-        header("Location: login.php");
-    } else if (strcmp($login_valid, 'success') == 0) {
-        echo "<script>alert('Password Anda salah. Silahkan coba lagi!')</script>";
+    if($login_valid){
         header("Location: index.php");
     }
 
