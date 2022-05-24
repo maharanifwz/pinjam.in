@@ -1,6 +1,5 @@
 <?php
-
-include 'config.php';
+require_once "register_control.php";
 
 session_start();
 
@@ -11,33 +10,39 @@ if (isset($_POST['Register'])) {
     $alamat = $_POST['alamat'];
     $password = $_POST['password'];
 
+    $register = new register_control();
 
+    $register_valid = $register->register($nama, $username, $email, $alamat, $password);
 
-    $sql = "SELECT * FROM pengguna WHERE email = '$email'";
-    $result = mysqli_query($mysqli, $sql);
-    if (!$result->num_rows > 0) {
-        $sql = "SELECT * FROM pengguna WHERE username = '$username'";
-        $result = mysqli_query($mysqli, $sql);
-        if (!$result->num_rows > 0) {
-            $sqlquery = "INSERT INTO pengguna VALUES (NULL, '$nama', '$username', '$email', '$alamat' ,'$password');";
-            $result = mysqli_query($mysqli, $sqlquery);
-            if ($result) {
-                echo "<script>alert('Selamat, registrasi berhasil!')</script>";
-                $username = "";
-                $nama = "";
-                $email = "";
-                $alamat = "";
-                $_POST['password'] = "";
-                header("Location: login.php");
-            } else {
-                echo "<script>alert('Terjadi kesalahan.')</script>";
-            }
-        } else {
-            echo "<script>alert('Username Sudah Terdaftar.')</script>";
-        }
-    } else {
-        echo "<script>alert('Email Sudah Terdaftar.')</script>";
+    if($register_valid){
+        $_POST['password'] = "";
+        header("Location: login.php");
     }
+    // $sql = "SELECT * FROM pengguna WHERE email = '$email'";
+    // $result = mysqli_query($mysqli, $sql);
+    // if (!$result->num_rows > 0) {
+    //     $sql = "SELECT * FROM pengguna WHERE username = '$username'";
+    //     $result = mysqli_query($mysqli, $sql);
+    //     if (!$result->num_rows > 0) {
+    //         $sqlquery = "INSERT INTO pengguna VALUES (NULL, '$nama', '$username', '$email', '$alamat' ,'$password');";
+    //         $result = mysqli_query($mysqli, $sqlquery);
+    //         if ($result) {
+    //             echo "<script>alert('Selamat, registrasi berhasil!')</script>";
+    //             $username = "";
+    //             $nama = "";
+    //             $email = "";
+    //             $alamat = "";
+    //             $_POST['password'] = "";
+    //             header("Location: login.php");
+    //         } else {
+    //             echo "<script>alert('Terjadi kesalahan.')</script>";
+    //         }
+    //     } else {
+    //         echo "<script>alert('Username Sudah Terdaftar.')</script>";
+    //     }
+    // } else {
+    //     echo "<script>alert('Email Sudah Terdaftar.')</script>";
+    // }
 }
 
 ?>
