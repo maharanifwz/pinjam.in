@@ -23,7 +23,7 @@ class login_control
 
         if ($rs->num_rows > 0) {
             if ($data['password'] != $password) {
-                //ini dicomment biar gak ikut keprint;
+                //ini dicomment biar gak ikut keprint
                 // echo "<script>alert('Password Anda salah. Silahkan coba lagi!')</script>";
                 return false;
             } else {

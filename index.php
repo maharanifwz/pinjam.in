@@ -203,7 +203,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
     </section>
 
     <section id="modal-container">
-        <!-- Details Modal -->
+        <!-- Details Modal - -->
         <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

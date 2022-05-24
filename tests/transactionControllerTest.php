@@ -17,7 +17,7 @@ class transactionControllerTest extends TestCase{
         $data = array($besarPinjaman,$tenor ,$startDate, $periode );
         $paymentData = array(676667, 673334, 670001);
 
-        //Create object and call function
+        //Create object and call functio
         $transac = new transaction();
         $transac->setData($besarPinjaman, $tenor, $startDate);
         $condition = $transac->setBunga();

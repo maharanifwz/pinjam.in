@@ -23,7 +23,7 @@ class loginControllerTest extends TestCase{
 
         
         $this->assertFalse($sm->login('ini pasti salah' , 'pass123'));
-        ///If the test is fail, the system automatically stop.
+        ///If the test is fail, the system automatically stop
         $this->assertFalse($sm->login($username1 , $pass1)); 
         $this->assertTrue($sm->login('tes123' , 'pass123'));  
         // $this->assertFalse( $sm->login('haroen' , 'pass123')); 

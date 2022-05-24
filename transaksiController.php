@@ -107,7 +107,8 @@ class transaction{
                 //     <th>Angsuran Pokok</th>
                 //     <th>Angsuran Total</th>
                 //     <th>Sisa Angsuran</th>
-                //     </tr>";
+                //     </tr>"; 
+                // 
                     $angsuranbunga = ceil($sisapinjaman * $bunga);
                     $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
                     array_push($this->paymentData, $angsurantotal); //add array for unit testing
