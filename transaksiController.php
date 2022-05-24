@@ -1,76 +1,161 @@
 <?php
+session_start();
 
 class transaction{
+    public $pinjamanAwal;
+    public $tenor;
+    public $startDate;
+    public $endDate;
+    public $periode;
+    public $sisaPinjaman;
+    public $bunga;
+    public $totalAngsuran;
+    public $DateInterval_construct;
 
-    // public function addData($besarPinjaman){
-    //     if (isset($besarPinjaman)) {
-    //         $pinjamanawal  = $besarPinjaman;
-    //         $tenor  = $_POST['tenor'];
-    //         $startdate = $_POST['tanggalpinjaman'];
 
-    //         $_SESSION['besarpinjaman'] = $pinjamanawal;
-    //         $_SESSION['tenor'] = $tenor;
-    //         $_SESSION['tanggalpinjaman'] = $startdate;
-    //     } else {
-    //         $pinjamanawal  = $_SESSION['besarpinjaman'];
-    //         $tenor  = $_SESSION['tenor'];
-    //         $startdate = $_SESSION['tanggalpinjaman'];
-    //     }
-    // }
+    public function setData($bp, $ten, $startDate)
+    {
+        $this->pinjamanAwal = $bp;
+        $this->tenor = $ten;
+        $this->startDate = $startDate;
+        $this->endDate = 0;
+        $this->sisaPinjaman = $bp;
+        $this->periode = (int)substr($ten, 0, 2);
+        $this->bunga=0;
+        $this->DateInterval_construct = "";
 
-    public function simulation(){
+        $_SESSION['besarPinjaman'] = $bp;
+        $_SESSION['tenor'] = $ten;
+        $_SESSION['tanggalPinjaman'] = $startDate;
+        $_SESSION['periode'] = $this->periode;
 
-        return  "hey";
     }
 
-    public function rincian($date, $pinjaman){
-
-        $timeInterval = new DatePeriod(
-                                new DateTime($date[0]),
-                                new DateInterval($date[1]),
-                                new DateTime($date[2])
-                            );
-
-                            $angsuranpokok = ceil($pinjaman[0] /$pinjaman[1]);
-
-
-                            foreach ($timeInterval as $key => $value) {
-                                echo "<table>
-
-                                                <tr>
-                                                    <th>Periode</th>
-                                                    <th>Angsuran Bunga</th>
-                                                    <th>Angsuran Pokok</th>
-                                                    <th>Angsuran Total</th>
-                                                    <th>Sisa Angsuran</th>
-                                                </tr>";
-                                $angsuranbunga = ceil($sisapinjaman * $bunga);
-                                $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
-                                $totalangsuran += $angsurantotal;
-                                $angsuranbunga_v = number_format($angsuranbunga);
-                                $angsuranpokok_v = number_format($angsuranpokok);
-                                $angsurantotal_v = number_format($angsurantotal);
-                                $sisapinjaman = ceil($sisapinjaman - $angsuranpokok);
-                                if ($sisapinjaman < 0) {
-                                    $sisapinjaman = 0;
-                                }
-                                $sisapinjaman_v = number_format($sisapinjaman);
-                                $date = $value->format('Y-m-d');
-                                echo "<tr>";
-                                echo "<td>$date</td>";
-                                echo "<td>Rp.$angsuranbunga_v</td>";
-                                echo "<td>Rp.$angsuranpokok_v</td>";
-                                echo "<td>Rp.$angsurantotal_v</td>";
-                                echo "<td>Rp.$sisapinjaman_v</td>";
-                                echo "</tr>";
-                            }
-        // return "tara";
+    public function getData()
+    {
+        $bp = $this->pinjamanAwal;
+        $tenor = $this->tenor;
+        $startDate = $this->startDate;
+        $periode = $this->periode;
+        $data = array($bp, $tenor, $startDate, $periode);
+        return $data;
     }
 
-    public function total($totalangsuran){
-        echo number_format($totalangsuran);
+    public function getDataSession()
+    {
+        $this->pinjamanAwal = $_SESSION['besarPinjaman'];
+        $this->tenor = $_SESSION['tenor'];
+        $this->startDate = $_SESSION['tanggalPinjaman'];
+        $this->periode = $_SESSION['periode'];
     }
 
+    public function setBunga()
+    {
+        if(isset($_SESSION['besarPinjaman'])){
+            $sisaPinjaman = $this->sisaPinjaman;
+            $DateInterval_construct = "";
+            $bunga = 0;
+            $Condition = true;
+            if (substr($this->tenor, -1) == 'm') { #mengambil karakter terakhir
+                if ($this->pinjamanAwal < 20000000) {
+                    $Condition = false;
+                }
+                $bunga = 0.1;
+                $this->startDate = date("Y-m", strtotime($this->startDate));
+                $enddate = date('Y-m', strtotime($this->startDate . ' + ' . $this->periode . " months"));
+                $DateInterval_construct = "P1M";
+            } else {
+                if ($this->pinjamanAwal > 20000000) {
+                    $Condition = false;
+                }
+                $bunga = 0.005;
+                $enddate = date('Y-m-d', strtotime($this->startDate . ' + ' . $this->periode . " days"));
+                $DateInterval_construct = "P1D";
+            }
+            $_SESSION['bunga'] = $bunga;
+            $this->bunga = $bunga;
+            $this->endDate = $enddate;
+            $this->DateInterval_construct = $DateInterval_construct;
+            return $Condition;
+        }
+        
+    }
+
+    public function paymentDetails()
+    {
+        $totalangsuran = 0;
+        if(isset($_SESSION['besarPinjaman'])){
+            $timeInterval = new DatePeriod(
+            new DateTime($this->startDate),
+            new DateInterval($this->DateInterval_construct),
+            new DateTime($this->endDate)
+            );
+            $sisapinjaman = $this->sisaPinjaman;
+            $periode = $this->periode;
+            $bunga = $this->bunga;
+            $angsuranpokok = ceil($this->sisaPinjaman / $periode);
+
+            foreach ($timeInterval as $key => $value) {
+                echo "<table>
+
+                    <tr>
+                    <th>Periode</th>
+                    <th>Angsuran Bunga</th>
+                    <th>Angsuran Pokok</th>
+                    <th>Angsuran Total</th>
+                    <th>Sisa Angsuran</th>
+                    </tr>";
+                    $angsuranbunga = ceil($sisapinjaman * $bunga);
+                    $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
+                    $totalangsuran += $angsurantotal;
+                    $angsuranbunga_v = number_format($angsuranbunga);
+                    $angsuranpokok_v = number_format($angsuranpokok);
+                    $angsurantotal_v = number_format($angsurantotal);
+                    $sisapinjaman = ceil($sisapinjaman - $angsuranpokok);
+                    if ($sisapinjaman < 0) {
+                        $sisapinjaman = 0;
+                    }
+                    $sisapinjaman_v = number_format($sisapinjaman);
+                    $date = $value->format('Y-m-d');
+                    echo "<tr>";
+                    echo "<td>$date</td>";
+                    echo "<td>Rp.$angsuranbunga_v</td>";
+                    echo "<td>Rp.$angsuranpokok_v</td>";
+                    echo "<td>Rp.$angsurantotal_v</td>";
+                    echo "<td>Rp.$sisapinjaman_v</td>";
+                    echo "</tr>";
+            }
+            $this->totalAngsuran = $totalangsuran;
+        }
+           
+
+        
+    }
+
+    public function paymentDetailFail()
+    {
+        if(isset($_SESSION['besarPinjaman'])){
+            echo "<h3>Untuk pinjaman dibawah 20 juta hanya dapat menggunakaan tenor harian sedangkan pinjaman
+            diatas 20 juta hanya dapat menggunakaan tenor bulanan.</h3>";
+        }
+        
+    }
+
+    public function totalPayment()
+    {
+        echo "Total angsuran anda sebesar Rp ", number_format($this->totalAngsuran);
+    }
+
+    public function simulation()
+    {
+        $tenor = $_SESSION['tenor'];
+        $startDate = $_SESSION['tanggalPinjaman'];
+        $pinjamanawal  = $_SESSION['besarPinjaman'];
+        $bunga = $_SESSION['bunga'];
+        $periode = $_SESSION['periode'];
+        $pinjamanPeriode1 = ($pinjamanawal / $periode) + ($pinjamanawal * $bunga);
+        $this->setData($pinjamanawal,$tenor, $startDate); //set ulang data
+        return $pinjamanPeriode1;
+    }
 }
-
 ?>

@@ -1,16 +1,15 @@
 <?php
 include 'config.php';
-require 'transaksiController.php';
-session_start();
+include 'transaksiController.php';
 
-$totalangsuran = 0;
+$trControll = new transaction();
 
 if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
-    $pinjamanawal  = $_SESSION['besarpinjaman'];
-    $bunga = $_SESSION['bunga'];
-    $periode = $_SESSION['periode'];
-    $pinjamanPeriode1 = ($pinjamanawal / $periode) + ($pinjamanawal * $bunga);
-
+    // $pinjamanawal  = $_SESSION['besarPinjaman'];
+    // $bunga = $_SESSION['bunga'];
+    // $periode = $_SESSION['periode'];
+    $pinjamanPeriode1 = $trControll->simulation();
+    $trControll->getDataSession();
     if ((isset($_POST['angsuran'])) & ($_POST['angsuran'] < $pinjamanPeriode1)) {
 ?>
         <div class="alert alert-danger alert-warning alert-dismissible fade show" role="alert">
@@ -39,6 +38,8 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 <?php }
+
+
 }
 ?>
 
@@ -111,12 +112,12 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                 <h2 class="installment-desc">Cari Tahu Angsuran Mu Disini</h2>
                 <form action="" method="POST">
                     <?php
-                    if (isset($_SESSION['besarpinjaman'])) {
+                    if (isset($_SESSION['besarPinjaman'])) {
 
                     ?>
                         <div>
                             <label for="besarpinjaman">Besar Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="text" name="besarpinjaman" id="besarpinjaman" value="<?php echo "RP." . number_format($_SESSION["besarpinjaman"]) ?>" required>
+                            <input type="text" name="besarpinjaman" id="besarpinjaman" value="<?php echo "RP." . number_format($_SESSION["besarPinjaman"]) ?>" required>
                         </div>
                         <div>
                             <label for="tenorpinjaman">Tenor Pinjaman</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -134,7 +135,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                         </div>
                         <div>
                             <label for="tanggalpinjaman">Tanggal Pinjaman</label>&nbsp;&nbsp;&nbsp;
-                            <input type="date" name="tanggalpinjaman" id="tanggalpinjaman" value="<?php echo $_SESSION["tanggalpinjaman"] ?>" required>
+                            <input type="date" name="tanggalpinjaman" id="tanggalpinjaman" value="<?php echo $_SESSION["tanggalPinjaman"] ?>" required>
                         </div>
                         <div class="center">
                             <input class="submit" id="simpan" type="submit" value="Simpan Data Pinjaman" name="simpanData">
@@ -183,7 +184,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                     <img src="/img/simulasi.png" alt="Simulasi Angsuran">
                     <h3>Simulasi Angsuran</h3>
                     <p class="box-desc">Cek bagaimana angsuran yang harus dibayarkan secara efektif perbulannya beserta bunga nya.</p>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#simulasiModal">Coba bayar</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#simulasiModal">Coba Bayar</button>
                 </div>
                 <div class="box">
                     <img src="/img/rincian.png" alt="Rincian Angsuran">
@@ -211,53 +212,34 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                 <div class="modal-content">
 
                     <?php
-                    // $besarPinjaman = $_POST['besarpinjaman'];
-                    $trControll = new transaction();
-                    // $trControll->addData();
-                    //input data pinjaman//
-                    if (isset($_POST['besarpinjaman'])) {
+
+                    // if (isset($_POST['besarpinjaman'])) {
+                    //     $pinjamanawal  = $_POST['besarpinjaman'];
+                    //     $tenor  = $_POST['tenor'];
+                    //     $startdate = $_POST['tanggalpinjaman'];
+
+                    //     $_SESSION['besarpinjaman'] = $pinjamanawal;
+                    //     $_SESSION['tenor'] = $tenor;
+                    //     $_SESSION['tanggalpinjaman'] = $startdate;
+                    // } else {
+                    //     $pinjamanawal  = $_SESSION['besarpinjaman'];
+                    //     $tenor  = $_SESSION['tenor'];
+                    //     $startdate = $_SESSION['tanggalpinjaman'];
+                    // }
+
+                    if(isset($_POST['besarpinjaman'])){
                         $pinjamanawal  = $_POST['besarpinjaman'];
                         $tenor  = $_POST['tenor'];
                         $startdate = $_POST['tanggalpinjaman'];
 
-                        $_SESSION['besarpinjaman'] = $pinjamanawal;
-                        $_SESSION['tenor'] = $tenor;
-                        $_SESSION['tanggalpinjaman'] = $startdate;
-                    } else {
-                        $pinjamanawal  = $_SESSION['besarpinjaman'];
-                        $tenor  = $_SESSION['tenor'];
-                        $startdate = $_SESSION['tanggalpinjaman'];
+                        $trControll->setData($pinjamanawal, $tenor, $startdate);
+                        
+                    }else{
+
                     }
-
-                    
-                    $sisapinjaman = $pinjamanawal;
-                    $enddate = 0;
-
-                    $periode = (int)substr($tenor, 0, 2); #mengambil 2 karakter pertama
-                    $_SESSION['periode'] = $periode;
-
-                    $DateInterval_construct = "";
-                    $bunga = 0;
                     $Condition = true;
-                    if (substr($tenor, -1) == 'm') { #mengambil karakter terakhir
-                        if ($pinjamanawal < 20000000) {
-                            $Condition = false;
-                        }
-                        $bunga = 0.1;
-                        $startdate = date("Y-m", strtotime($startdate));
-                        $enddate = date('Y-m', strtotime($startdate . ' + ' . $periode . " months"));
-                        $DateInterval_construct = "P1M";
-                    } else {
-                        if ($pinjamanawal > 20000000) {
-                            $Condition = false;
-                        }
-                        $bunga = 0.005;
-                        $enddate = date('Y-m-d', strtotime($startdate . ' + ' . $periode . " days"));
-                        $DateInterval_construct = "P1D";
-                    }
+                    $Condition = $trControll->setBunga();
 
-                    //rincian angsuran//
-                    $_SESSION['bunga'] = $bunga;
                     if ($Condition) { ?>
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Tabel Angsuran</h5>
@@ -265,48 +247,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                         </div>
                         <div class="modal-body">
                             <?php
-                            $date = array($startdate, $DateInterval_construct, $enddate);
-                            $pinjaman = array($sisapinjaman, $periode);
-                            $trControll->rincian($date, $pinjaman);
-                            // $timeInterval = new DatePeriod(
-                            //     new DateTime($startdate),
-                            //     new DateInterval($DateInterval_construct),
-                            //     new DateTime($enddate)
-                            // );
-
-                            // $angsuranpokok = ceil($sisapinjaman / $periode);
-
-
-                            // foreach ($timeInterval as $key => $value) {
-                            //     echo "<table>
-
-                            //                     <tr>
-                            //                         <th>Periode</th>
-                            //                         <th>Angsuran Bunga</th>
-                            //                         <th>Angsuran Pokok</th>
-                            //                         <th>Angsuran Total</th>
-                            //                         <th>Sisa Angsuran</th>
-                            //                     </tr>";
-                            //     $angsuranbunga = ceil($sisapinjaman * $bunga);
-                            //     $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
-                            //     $totalangsuran += $angsurantotal;
-                            //     $angsuranbunga_v = number_format($angsuranbunga);
-                            //     $angsuranpokok_v = number_format($angsuranpokok);
-                            //     $angsurantotal_v = number_format($angsurantotal);
-                            //     $sisapinjaman = ceil($sisapinjaman - $angsuranpokok);
-                            //     if ($sisapinjaman < 0) {
-                            //         $sisapinjaman = 0;
-                            //     }
-                            //     $sisapinjaman_v = number_format($sisapinjaman);
-                            //     $date = $value->format('Y-m-d');
-                            //     echo "<tr>";
-                            //     echo "<td>$date</td>";
-                            //     echo "<td>Rp.$angsuranbunga_v</td>";
-                            //     echo "<td>Rp.$angsuranpokok_v</td>";
-                            //     echo "<td>Rp.$angsurantotal_v</td>";
-                            //     echo "<td>Rp.$sisapinjaman_v</td>";
-                            //     echo "</tr>";
-                            // }
+                            $trControll->paymentDetails();
                         } else { ?>
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Tabel Angsuran</h5>
@@ -315,11 +256,8 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                             <div class="modal-body">
 
                             <?php
-                            echo "<h3>Untuk pinjaman dibawah 20 juta hanya dapat menggunakaan tenor harian sedangkan pinjaman
-                                                 diatas 20 juta hanya dapat menggunakaan tenor bulanan.</h3>";
-                        }
-
-                            ?>
+                            $trControll->paymentDetailFail();
+                        }?>
                             </table>
                             </div>
                             <div class="modal-footer">
@@ -329,7 +267,6 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                 </div>
             </div>
 
-            //TOTAL ANGSURAN//
             <!-- Modal Total Angsuran -->
             <div class="modal fade" id="angsuranModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -339,7 +276,8 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Total angsuran anda sebesar Rp <?php $trControll->total($totalangsuran)  ?>
+                            <!-- Total angsuran anda sebesar Rp  -->
+                            <?php $trControll->totalPayment(); $trControll->getData();?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -361,7 +299,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                                 <label for="angsuran">Angsuran yang dibayarkan</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <input type="text" name="angsuran" id="angsuran" required>
                                 <div class="center">
-                                    <input class="submit" id="simpan" type="submit" value="bayar" name="bayar">
+                                    <input class="submit" id="simpan" type="submit" value="Bayar" name="bayar">
                                 </div>
                             </form>
                         </div>
