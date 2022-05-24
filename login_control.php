@@ -1,10 +1,14 @@
 <?php
 
 session_start();
-
+include 'config.php';
 // File : login_control.php
+
+global $mysqli;
+
 class login_control
 {
+    
     public function login($username, $password)
     {
         global $mysqli;
@@ -12,14 +16,15 @@ class login_control
         $rs = $mysqli->query($sqlquery);
 
         if (!$rs) {
-            return false;
+            return $rs;
         }
 
         $data = $rs->fetch_assoc();
 
         if ($rs->num_rows > 0) {
             if ($data['password'] != $password) {
-                echo "<script>alert('Password Anda salah. Silahkan coba lagi!')</script>";
+                //ini dicomment biar gak ikut keprint;
+                // echo "<script>alert('Password Anda salah. Silahkan coba lagi!')</script>";
                 return false;
             } else {
                 $_SESSION['username'] = $username;
@@ -29,7 +34,7 @@ class login_control
 
             }
         } else {
-            echo "<script>alert('Username Tidak Dikenali. Silahkan coba lagi!')</script>";
+            // echo "<script>alert('Username Tidak Dikenali. Silahkan coba lagi!')</script>";
             return false;
         }
     }

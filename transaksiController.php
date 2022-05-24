@@ -11,11 +11,12 @@ class transaction{
     public $bunga;
     public $totalAngsuran;
     public $DateInterval_construct;
+    public $paymentData = array();
 
 
     public function setData($bp, $ten, $startDate)
     {
-        $this->pinjamanAwal = $bp;
+        $this->pinjamanAwal = (int) $bp;
         $this->tenor = $ten;
         $this->startDate = $startDate;
         $this->endDate = 0;
@@ -24,7 +25,7 @@ class transaction{
         $this->bunga=0;
         $this->DateInterval_construct = "";
 
-        $_SESSION['besarPinjaman'] = $bp;
+        $_SESSION['besarPinjaman'] = $this->pinjamanAwal;;
         $_SESSION['tenor'] = $ten;
         $_SESSION['tanggalPinjaman'] = $startDate;
         $_SESSION['periode'] = $this->periode;
@@ -43,7 +44,7 @@ class transaction{
 
     public function getDataSession()
     {
-        $this->pinjamanAwal = $_SESSION['besarPinjaman'];
+        $this->pinjamanAwal = (int) $_SESSION['besarPinjaman'];
         $this->tenor = $_SESSION['tenor'];
         $this->startDate = $_SESSION['tanggalPinjaman'];
         $this->periode = $_SESSION['periode'];
@@ -81,6 +82,7 @@ class transaction{
         
     }
 
+
     public function paymentDetails()
     {
         $totalangsuran = 0;
@@ -93,20 +95,22 @@ class transaction{
             $sisapinjaman = $this->sisaPinjaman;
             $periode = $this->periode;
             $bunga = $this->bunga;
-            $angsuranpokok = ceil($this->sisaPinjaman / $periode);
+            $angsuranpokok = ceil((int) $this->sisaPinjaman / $periode);
 
             foreach ($timeInterval as $key => $value) {
-                echo "<table>
+                // INI NNTI DI COMMENT DOLOO
+                // echo "<table>
 
-                    <tr>
-                    <th>Periode</th>
-                    <th>Angsuran Bunga</th>
-                    <th>Angsuran Pokok</th>
-                    <th>Angsuran Total</th>
-                    <th>Sisa Angsuran</th>
-                    </tr>";
+                //     <tr>
+                //     <th>Periode</th>
+                //     <th>Angsuran Bunga</th>
+                //     <th>Angsuran Pokok</th>
+                //     <th>Angsuran Total</th>
+                //     <th>Sisa Angsuran</th>
+                //     </tr>";
                     $angsuranbunga = ceil($sisapinjaman * $bunga);
                     $angsurantotal = ceil($angsuranpokok + $angsuranbunga);
+                    array_push($this->paymentData, $angsurantotal); //add array for unit testing
                     $totalangsuran += $angsurantotal;
                     $angsuranbunga_v = number_format($angsuranbunga);
                     $angsuranpokok_v = number_format($angsuranpokok);
@@ -117,25 +121,27 @@ class transaction{
                     }
                     $sisapinjaman_v = number_format($sisapinjaman);
                     $date = $value->format('Y-m-d');
-                    echo "<tr>";
-                    echo "<td>$date</td>";
-                    echo "<td>Rp.$angsuranbunga_v</td>";
-                    echo "<td>Rp.$angsuranpokok_v</td>";
-                    echo "<td>Rp.$angsurantotal_v</td>";
-                    echo "<td>Rp.$sisapinjaman_v</td>";
-                    echo "</tr>";
+                    // echo "<tr>";
+                    // echo "<td>$date</td>";
+                    // echo "<td>Rp.$angsuranbunga_v</td>";
+                    // echo "<td>Rp.$angsuranpokok_v</td>";
+                    // echo "<td>Rp.$angsurantotal_v</td>";
+                    // echo "<td>Rp.$sisapinjaman_v</td>";
+                    // echo "</tr>";
             }
             $this->totalAngsuran = $totalangsuran;
         }
-           
-
-        
+    }
+    
+    public function getPaymentData(){
+        //ini ngembaliin total angsuran
+        return $this->paymentData;
     }
 
     public function paymentDetailFail()
     {
         if(isset($_SESSION['besarPinjaman'])){
-            echo "<h3>Untuk pinjaman dibawah 20 juta hanya dapat menggunakaan tenor harian sedangkan pinjaman
+            return "<h3>Untuk pinjaman dibawah 20 juta hanya dapat menggunakaan tenor harian sedangkan pinjaman
             diatas 20 juta hanya dapat menggunakaan tenor bulanan.</h3>";
         }
         
@@ -143,7 +149,7 @@ class transaction{
 
     public function totalPayment()
     {
-        echo "Total angsuran anda sebesar Rp ", number_format($this->totalAngsuran);
+        return number_format($this->totalAngsuran);
     }
 
     public function simulation()
@@ -155,7 +161,7 @@ class transaction{
         $periode = $_SESSION['periode'];
         $pinjamanPeriode1 = ($pinjamanawal / $periode) + ($pinjamanawal * $bunga);
         $this->setData($pinjamanawal,$tenor, $startDate); //set ulang data
-        return $pinjamanPeriode1;
+        return ceil($pinjamanPeriode1);
     }
 }
 ?>

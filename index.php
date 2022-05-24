@@ -5,9 +5,6 @@ include 'transaksiController.php';
 $trControll = new transaction();
 
 if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
-    // $pinjamanawal  = $_SESSION['besarPinjaman'];
-    // $bunga = $_SESSION['bunga'];
-    // $periode = $_SESSION['periode'];
     $pinjamanPeriode1 = $trControll->simulation();
     $trControll->getDataSession();
     if ((isset($_POST['angsuran'])) & ($_POST['angsuran'] < $pinjamanPeriode1)) {
@@ -213,20 +210,6 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
 
                     <?php
 
-                    // if (isset($_POST['besarpinjaman'])) {
-                    //     $pinjamanawal  = $_POST['besarpinjaman'];
-                    //     $tenor  = $_POST['tenor'];
-                    //     $startdate = $_POST['tanggalpinjaman'];
-
-                    //     $_SESSION['besarpinjaman'] = $pinjamanawal;
-                    //     $_SESSION['tenor'] = $tenor;
-                    //     $_SESSION['tanggalpinjaman'] = $startdate;
-                    // } else {
-                    //     $pinjamanawal  = $_SESSION['besarpinjaman'];
-                    //     $tenor  = $_SESSION['tenor'];
-                    //     $startdate = $_SESSION['tanggalpinjaman'];
-                    // }
-
                     if(isset($_POST['besarpinjaman'])){
                         $pinjamanawal  = $_POST['besarpinjaman'];
                         $tenor  = $_POST['tenor'];
@@ -248,6 +231,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                         <div class="modal-body">
                             <?php
                             $trControll->paymentDetails();
+                            print_r($trControll->getData());
                         } else { ?>
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Tabel Angsuran</h5>
@@ -256,7 +240,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                             <div class="modal-body">
 
                             <?php
-                            $trControll->paymentDetailFail();
+                            echo $trControll->paymentDetailFail();
                         }?>
                             </table>
                             </div>
@@ -277,7 +261,7 @@ if ((isset($_POST["bayar"])) & (isset($_SESSION['bunga']))) {
                         </div>
                         <div class="modal-body">
                             <!-- Total angsuran anda sebesar Rp  -->
-                            <?php $trControll->totalPayment(); $trControll->getData();?>
+                            Total angsuran anda sebesar Rp  <?php echo $trControll->totalPayment();?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
