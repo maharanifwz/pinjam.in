@@ -14,9 +14,10 @@ class registerControllerTest extends TestCase{
 
     public function testsimulation(){
         $test = new register_control();
-    
-        $this->assertTrue($test->register('ini tes' ,'testing', 'test@gmail.com', '', 'pass123'));
-        $this->assertTrue($test->register('ini tes 2' ,'tester', 'test2@gmail.com', '', 'pass123'));
+
+        //Failure testing
+        // $this->assertTrue($test->register('ini tes' ,'testing', 'test@gmail.com', '', 'pass123'));
+        // $this->assertTrue($test->register('ini tes 2' ,'tester', 'test2@gmail.com', '', 'pass123'));
         
         ///If the test is fail, the system automatically stop.
         $this->assertFalse($test->register('harun' , 'harunasrori', 'harun@gmail.com', '', 'pass123'));

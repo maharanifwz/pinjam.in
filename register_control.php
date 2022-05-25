@@ -2,7 +2,7 @@
 include 'config.php';
 
 session_start();
-
+global $mysqli;
 // File : register_control.php
 class register_control
 {
@@ -23,9 +23,7 @@ class register_control
                     $nama = "";
                     $email = "";
                     $alamat = "";
-                    // $_POST['password'] = "";
                     return true;
-                    // header("Location: login.php");
                 } else {
                     echo "<script>alert('Terjadi kesalahan.')</script>";
                     return false;
